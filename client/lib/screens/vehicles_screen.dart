@@ -14,6 +14,7 @@ class VehiclesScreen extends StatefulWidget {
 class _VehiclesScreenState extends State<VehiclesScreen> {
   List<dynamic> _vehicles = [];
   bool _loading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -22,12 +23,22 @@ class _VehiclesScreenState extends State<VehiclesScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final vehicles = await ApiClient.flatVehicles(widget.flatId);
     setState(() {
-      _vehicles = vehicles;
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final vehicles = await ApiClient.flatVehicles(widget.flatId);
+      setState(() {
+        _vehicles = vehicles;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _showAddDialog() async {
@@ -103,7 +114,9 @@ class _VehiclesScreenState extends State<VehiclesScreen> {
       floatingActionButton: FloatingActionButton(onPressed: _showAddDialog, child: const Icon(Icons.add)),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : _vehicles.isEmpty
+          : _error != null
+              ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(_error!, textAlign: TextAlign.center)))
+              : _vehicles.isEmpty
               ? const Center(child: Text('No vehicles added yet', style: TextStyle(color: AppColors.textSecondary)))
               : RefreshIndicator(
                   onRefresh: _load,

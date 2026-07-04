@@ -14,6 +14,7 @@ class GuardVisitorsScreen extends StatefulWidget {
 class _GuardVisitorsScreenState extends State<GuardVisitorsScreen> {
   List<dynamic> _visitors = [];
   bool _loading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -22,12 +23,22 @@ class _GuardVisitorsScreenState extends State<GuardVisitorsScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final visitors = await ApiClient.societyVisitors(widget.societyId);
     setState(() {
-      _visitors = visitors;
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final visitors = await ApiClient.societyVisitors(widget.societyId);
+      setState(() {
+        _visitors = visitors;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _updateStatus(int id, String status) async {
@@ -41,7 +52,13 @@ class _GuardVisitorsScreenState extends State<GuardVisitorsScreen> {
       onRefresh: _load,
       child: _loading
           ? const Center(child: CircularProgressIndicator())
-          : _visitors.isEmpty
+          : _error != null
+              ? ListView(
+                  children: [
+                    Padding(padding: const EdgeInsets.only(top: 80), child: Center(child: Text(_error!, textAlign: TextAlign.center))),
+                  ],
+                )
+              : _visitors.isEmpty
               ? ListView(
                   children: const [
                     Padding(

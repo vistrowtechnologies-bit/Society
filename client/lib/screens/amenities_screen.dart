@@ -16,6 +16,7 @@ class _AmenitiesScreenState extends State<AmenitiesScreen> {
   List<dynamic> _amenities = [];
   List<dynamic> _myBookings = [];
   bool _loading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -24,14 +25,24 @@ class _AmenitiesScreenState extends State<AmenitiesScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final amenities = await ApiClient.amenities(widget.societyId);
-    final bookings = await ApiClient.flatBookings(widget.flatId);
     setState(() {
-      _amenities = amenities;
-      _myBookings = bookings.where((b) => b['status'] == 'booked').toList();
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final amenities = await ApiClient.amenities(widget.societyId);
+      final bookings = await ApiClient.flatBookings(widget.flatId);
+      setState(() {
+        _amenities = amenities;
+        _myBookings = bookings.where((b) => b['status'] == 'booked').toList();
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _showBookDialog(Map<String, dynamic> amenity) async {
@@ -124,7 +135,9 @@ class _AmenitiesScreenState extends State<AmenitiesScreen> {
       appBar: AppBar(title: const Text('Amenities')),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : RefreshIndicator(
+          : _error != null
+              ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(_error!, textAlign: TextAlign.center)))
+              : RefreshIndicator(
               onRefresh: _load,
               child: ListView(
                 padding: const EdgeInsets.all(16),

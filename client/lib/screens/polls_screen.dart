@@ -14,6 +14,7 @@ class PollsScreen extends StatefulWidget {
 class _PollsScreenState extends State<PollsScreen> {
   List<dynamic> _polls = [];
   bool _loading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -22,12 +23,22 @@ class _PollsScreenState extends State<PollsScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final polls = await ApiClient.polls(widget.societyId);
     setState(() {
-      _polls = polls;
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final polls = await ApiClient.polls(widget.societyId);
+      setState(() {
+        _polls = polls;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _vote(int pollId, int optionId) async {
@@ -41,7 +52,9 @@ class _PollsScreenState extends State<PollsScreen> {
       appBar: AppBar(title: const Text('Society polls')),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : _polls.isEmpty
+          : _error != null
+              ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(_error!, textAlign: TextAlign.center)))
+              : _polls.isEmpty
               ? const Center(child: Text('No polls right now', style: TextStyle(color: AppColors.textSecondary)))
               : RefreshIndicator(
                   onRefresh: _load,

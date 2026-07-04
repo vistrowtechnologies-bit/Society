@@ -14,6 +14,7 @@ class AdminPollsScreen extends StatefulWidget {
 class _AdminPollsScreenState extends State<AdminPollsScreen> {
   List<dynamic> _polls = [];
   bool _loading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -22,12 +23,22 @@ class _AdminPollsScreenState extends State<AdminPollsScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final polls = await ApiClient.polls(widget.societyId);
     setState(() {
-      _polls = polls;
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final polls = await ApiClient.polls(widget.societyId);
+      setState(() {
+        _polls = polls;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _showCreateDialog() async {
@@ -95,7 +106,9 @@ class _AdminPollsScreenState extends State<AdminPollsScreen> {
       floatingActionButton: FloatingActionButton(onPressed: _showCreateDialog, child: const Icon(Icons.add)),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : _polls.isEmpty
+          : _error != null
+              ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(_error!, textAlign: TextAlign.center)))
+              : _polls.isEmpty
               ? const Center(child: Text('No polls yet', style: TextStyle(color: AppColors.textSecondary)))
               : RefreshIndicator(
                   onRefresh: _load,

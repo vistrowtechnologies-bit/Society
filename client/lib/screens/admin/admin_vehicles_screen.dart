@@ -14,6 +14,7 @@ class _AdminVehiclesScreenState extends State<AdminVehiclesScreen> {
   List<dynamic> _vehicles = [];
   String _query = '';
   bool _loading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -22,12 +23,22 @@ class _AdminVehiclesScreenState extends State<AdminVehiclesScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final vehicles = await ApiClient.societyVehicles(widget.societyId);
     setState(() {
-      _vehicles = vehicles;
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final vehicles = await ApiClient.societyVehicles(widget.societyId);
+      setState(() {
+        _vehicles = vehicles;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   List<dynamic> get _filtered {
@@ -52,7 +63,9 @@ class _AdminVehiclesScreenState extends State<AdminVehiclesScreen> {
           Expanded(
             child: _loading
                 ? const Center(child: CircularProgressIndicator())
-                : RefreshIndicator(
+                : _error != null
+                    ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(_error!, textAlign: TextAlign.center)))
+                    : RefreshIndicator(
                     onRefresh: _load,
                     child: ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 16),

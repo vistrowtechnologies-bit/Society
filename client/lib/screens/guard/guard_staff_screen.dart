@@ -14,6 +14,7 @@ class GuardStaffScreen extends StatefulWidget {
 class _GuardStaffScreenState extends State<GuardStaffScreen> {
   List<dynamic> _staff = [];
   bool _loading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -22,12 +23,22 @@ class _GuardStaffScreenState extends State<GuardStaffScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final staff = await ApiClient.societyStaff(widget.societyId);
     setState(() {
-      _staff = staff;
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final staff = await ApiClient.societyStaff(widget.societyId);
+      setState(() {
+        _staff = staff;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _checkIn(int id) async {
@@ -56,7 +67,13 @@ class _GuardStaffScreenState extends State<GuardStaffScreen> {
       onRefresh: _load,
       child: _loading
           ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
+          : _error != null
+              ? ListView(
+                  children: [
+                    Padding(padding: const EdgeInsets.only(top: 80), child: Center(child: Text(_error!, textAlign: TextAlign.center))),
+                  ],
+                )
+              : ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: _staff.length,
               itemBuilder: (context, i) {

@@ -30,11 +30,18 @@ class _VisitorsScreenState extends State<VisitorsScreen> {
 
   Future<void> _load() async {
     setState(() => _loading = true);
-    final visitors = await ApiClient.flatVisitors(widget.flatId);
-    setState(() {
-      _visitors = visitors;
-      _loading = false;
-    });
+    try {
+      final visitors = await ApiClient.flatVisitors(widget.flatId);
+      setState(() {
+        _visitors = visitors;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _preApprove() async {

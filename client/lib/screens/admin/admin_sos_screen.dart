@@ -14,6 +14,7 @@ class AdminSosScreen extends StatefulWidget {
 class _AdminSosScreenState extends State<AdminSosScreen> {
   List<dynamic> _alerts = [];
   bool _loading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -22,12 +23,22 @@ class _AdminSosScreenState extends State<AdminSosScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final alerts = await ApiClient.societySOSAlerts(widget.societyId, activeOnly: false);
     setState(() {
-      _alerts = alerts;
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final alerts = await ApiClient.societySOSAlerts(widget.societyId, activeOnly: false);
+      setState(() {
+        _alerts = alerts;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _resolve(int id) async {
@@ -41,7 +52,9 @@ class _AdminSosScreenState extends State<AdminSosScreen> {
       appBar: AppBar(title: const Text('SOS alerts')),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : _alerts.isEmpty
+          : _error != null
+              ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(_error!, textAlign: TextAlign.center)))
+              : _alerts.isEmpty
               ? const Center(child: Text('No alerts', style: TextStyle(color: AppColors.textSecondary)))
               : RefreshIndicator(
                   onRefresh: _load,

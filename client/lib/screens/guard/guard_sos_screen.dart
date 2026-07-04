@@ -14,6 +14,7 @@ class GuardSosScreen extends StatefulWidget {
 class _GuardSosScreenState extends State<GuardSosScreen> {
   List<dynamic> _alerts = [];
   bool _loading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -22,12 +23,22 @@ class _GuardSosScreenState extends State<GuardSosScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final alerts = await ApiClient.societySOSAlerts(widget.societyId);
     setState(() {
-      _alerts = alerts;
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final alerts = await ApiClient.societySOSAlerts(widget.societyId);
+      setState(() {
+        _alerts = alerts;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _resolve(int id) async {
@@ -41,7 +52,13 @@ class _GuardSosScreenState extends State<GuardSosScreen> {
       onRefresh: _load,
       child: _loading
           ? const Center(child: CircularProgressIndicator())
-          : _alerts.isEmpty
+          : _error != null
+              ? ListView(
+                  children: [
+                    Padding(padding: const EdgeInsets.only(top: 80), child: Center(child: Text(_error!, textAlign: TextAlign.center))),
+                  ],
+                )
+              : _alerts.isEmpty
               ? ListView(
                   children: const [
                     Padding(

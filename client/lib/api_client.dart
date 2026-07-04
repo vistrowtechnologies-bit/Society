@@ -311,6 +311,8 @@ class ApiClient {
 
   static Future<List<dynamic>> societyStaff(int societyId) async => await _get('/staff/society/$societyId');
 
+  static Future<List<dynamic>> flatStaff(int flatId) async => await _get('/staff/flat/$flatId');
+
   static Future<void> verifyStaff(int staffId, bool isVerified) async {
     await _patch('/staff/$staffId/verify', {'is_verified': isVerified});
   }

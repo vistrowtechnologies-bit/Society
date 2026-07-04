@@ -38,6 +38,16 @@ def add_staff(
     return staff
 
 
+@router.get("/flat/{flat_id}", response_model=List[StaffOut])
+def list_flat_staff(
+    flat_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    ensure_flat_access(db, current_user, flat_id)
+    return db.query(Staff).filter(Staff.flat_id == flat_id).all()
+
+
 @router.get("/society/{society_id}", response_model=List[StaffOut])
 def list_society_staff(
     society_id: int,

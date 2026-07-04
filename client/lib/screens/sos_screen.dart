@@ -16,6 +16,7 @@ class _SosScreenState extends State<SosScreen> {
   List<dynamic> _history = [];
   bool _loading = true;
   bool _sending = false;
+  String? _error;
 
   @override
   void initState() {
@@ -24,12 +25,22 @@ class _SosScreenState extends State<SosScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final history = await ApiClient.mySOSAlerts();
     setState(() {
-      _history = history;
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final history = await ApiClient.mySOSAlerts();
+      setState(() {
+        _history = history;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _confirmAndSend() async {
@@ -116,6 +127,8 @@ class _SosScreenState extends State<SosScreen> {
           const SizedBox(height: 8),
           if (_loading)
             const Center(child: CircularProgressIndicator())
+          else if (_error != null)
+            Padding(padding: const EdgeInsets.symmetric(vertical: 16), child: Text(_error!, textAlign: TextAlign.center))
           else if (_history.isEmpty)
             const Padding(padding: EdgeInsets.symmetric(vertical: 16), child: Text('No past alerts', style: TextStyle(color: AppColors.textSecondary)))
           else

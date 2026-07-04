@@ -14,6 +14,7 @@ class AdminAmenitiesScreen extends StatefulWidget {
 class _AdminAmenitiesScreenState extends State<AdminAmenitiesScreen> {
   List<dynamic> _amenities = [];
   bool _loading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -22,12 +23,22 @@ class _AdminAmenitiesScreenState extends State<AdminAmenitiesScreen> {
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
-    final amenities = await ApiClient.amenities(widget.societyId);
     setState(() {
-      _amenities = amenities;
-      _loading = false;
+      _loading = true;
+      _error = null;
     });
+    try {
+      final amenities = await ApiClient.amenities(widget.societyId);
+      setState(() {
+        _amenities = amenities;
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _error = e.toString().replaceFirst('Exception: ', '');
+        _loading = false;
+      });
+    }
   }
 
   Future<void> _showAddDialog() async {
@@ -93,7 +104,9 @@ class _AdminAmenitiesScreenState extends State<AdminAmenitiesScreen> {
       floatingActionButton: FloatingActionButton(onPressed: _showAddDialog, child: const Icon(Icons.add)),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : _amenities.isEmpty
+          : _error != null
+              ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(_error!, textAlign: TextAlign.center)))
+              : _amenities.isEmpty
               ? const Center(child: Text('No amenities set up yet', style: TextStyle(color: AppColors.textSecondary)))
               : RefreshIndicator(
                   onRefresh: _load,
