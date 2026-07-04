@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SocietyOS - Document Upload</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f7;
+        }
+        /* Custom interactions for the file drop zone */
+        .drop-zone--active {
+            border-color: #26215c;
+            background-color: rgba(38, 33, 92, 0.05);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#eeeeec",
+                        "on-secondary-fixed": "#2a1800",
+                        "secondary": "#835400",
+                        "on-surface": "#1a1c1b",
+                        "on-secondary-container": "#6e4600",
+                        "surface-container-highest": "#e2e3e1",
+                        "outline": "#787681",
+                        "outline-variant": "#c8c5d1",
+                        "surface-dim": "#dadad8",
+                        "secondary-fixed-dim": "#ffb956",
+                        "tertiary-container": "#003110",
+                        "primary-fixed": "#e3dfff",
+                        "surface": "#f9f9f7",
+                        "on-primary-container": "#8e8acb",
+                        "on-surface-variant": "#47464f",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f4f4f2",
+                        "on-background": "#1a1c1b",
+                        "tertiary-fixed-dim": "#62df7d",
+                        "tertiary-fixed": "#7ffc97",
+                        "tertiary": "#001a06",
+                        "surface-container-high": "#e8e8e6",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffddb5",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#005320",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9f7",
+                        "inverse-primary": "#c5c0ff",
+                        "primary-container": "#26215c",
+                        "inverse-on-surface": "#f1f1ef",
+                        "on-primary-fixed-variant": "#443f7b",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#17114d",
+                        "surface-tint": "#5b5795",
+                        "primary-fixed-dim": "#c5c0ff",
+                        "on-tertiary-fixed": "#002109",
+                        "secondary-container": "#fdb244",
+                        "on-tertiary-container": "#1ca64c",
+                        "primary": "#110847",
+                        "surface-bright": "#f9f9f7",
+                        "inverse-surface": "#2f3130",
+                        "surface-variant": "#e2e3e1",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xl": "32px",
+                        "container-max": "1440px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "md": "16px",
+                        "rail-width": "240px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky border-b border-outline-variant dark:border-outline bg-surface dark:bg-inverse-surface z-40">
+<div class="flex justify-between items-center px-lg h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed cursor-pointer transition-transform active:scale-95">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">SocietyOS</h1>
+</div>
+<div class="flex items-center gap-lg">
+<nav class="hidden md:flex gap-lg">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:bg-surface-container transition-colors px-md py-sm rounded-lg" href="#">Dashboard</a>
+<a class="text-primary dark:text-primary-fixed font-label-md text-label-md bg-surface-container transition-colors px-md py-sm rounded-lg" href="#">Documents</a>
+</nav>
+<div class="cursor-pointer active:scale-95 transition-transform text-primary dark:text-primary-fixed">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- Navigation Rail (Desktop) -->
+<aside class="hidden md:flex flex-col h-full py-lg fixed left-0 top-16 h-[calc(100vh-64px)] w-rail-width bg-primary-container z-30">
+<div class="px-md mb-lg">
+<div class="flex items-center gap-sm px-md py-sm">
+<div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant">admin_panel_settings</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-primary">Society Secretary</p>
+<p class="font-label-sm text-label-sm text-on-primary-container opacity-80">Admin Console</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-sm">
+<a class="text-on-primary-container opacity-80 font-label-md text-label-md flex items-center gap-md px-lg py-sm hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">grid_view</span> Dashboard
+                </a>
+<a class="text-on-primary-container opacity-80 font-label-md text-label-md flex items-center gap-md px-lg py-sm hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span> Resident Directory
+                </a>
+<a class="text-on-primary border-l-4 border-secondary-container bg-on-primary-fixed-variant font-label-md text-label-md flex items-center gap-md px-lg py-sm transition-all duration-200" href="#">
+<span class="material-symbols-outlined">description</span> Documents
+                </a>
+<a class="text-on-primary-container opacity-80 font-label-md text-label-md flex items-center gap-md px-lg py-sm hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span> Financial Billing
+                </a>
+<a class="text-on-primary-container opacity-80 font-label-md text-label-md flex items-center gap-md px-lg py-sm hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">handyman</span> Maintenance Requests
+                </a>
+<a class="text-on-primary-container opacity-80 font-label-md text-label-md flex items-center gap-md px-lg py-sm hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+                </a>
+</nav>
+</aside>
+<!-- Content Canvas -->
+<main class="flex-1 md:ml-[240px] p-md md:p-lg pb-32">
+<div class="max-w-3xl mx-auto">
+<!-- Header Section -->
+<div class="mb-lg">
+<nav class="flex text-on-surface-variant font-label-sm text-label-sm mb-sm items-center gap-xs">
+<span>Documents</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Upload New</span>
+</nav>
+<h2 class="font-headline-md text-headline-md text-primary mb-xs">Submit Society Document</h2>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Ensure all legal and administrative documents are correctly categorized for resident access.</p>
+</div>
+<!-- Main Form Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="p-lg space-y-xl">
+<!-- Category Selector -->
+<div>
+<label class="block font-label-md text-label-md text-primary mb-sm">Document Category</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<label class="relative flex flex-col items-center justify-center p-md border border-outline-variant rounded-xl cursor-pointer hover:bg-surface-container-low transition-all group">
+<input class="peer absolute opacity-0" name="category" type="radio" value="audit"/>
+<div class="peer-checked:bg-secondary-container peer-checked:text-on-secondary-fixed w-10 h-10 rounded-full flex items-center justify-center bg-surface-container text-on-surface-variant mb-xs transition-colors">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant peer-checked:text-primary">Audit</span>
+<div class="absolute inset-0 border-2 border-transparent peer-checked:border-secondary-container rounded-xl pointer-events-none"></div>
+</label>
+<label class="relative flex flex-col items-center justify-center p-md border border-outline-variant rounded-xl cursor-pointer hover:bg-surface-container-low transition-all group">
+<input checked="" class="peer absolute opacity-0" name="category" type="radio" value="byelaws"/>
+<div class="peer-checked:bg-secondary-container peer-checked:text-on-secondary-fixed w-10 h-10 rounded-full flex items-center justify-center bg-surface-container text-on-surface-variant mb-xs transition-colors">
+<span class="material-symbols-outlined">gavel</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant peer-checked:text-primary">Bye-laws</span>
+<div class="absolute inset-0 border-2 border-transparent peer-checked:border-secondary-container rounded-xl pointer-events-none"></div>
+</label>
+<label class="relative flex flex-col items-center justify-center p-md border border-outline-variant rounded-xl cursor-pointer hover:bg-surface-container-low transition-all group">
+<input class="peer absolute opacity-0" name="category" type="radio" value="circulars"/>
+<div class="peer-checked:bg-secondary-container peer-checked:text-on-secondary-fixed w-10 h-10 rounded-full flex items-center justify-center bg-surface-container text-on-surface-variant mb-xs transition-colors">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant peer-checked:text-primary">Circulars</span>
+<div class="absolute inset-0 border-2 border-transparent peer-checked:border-secondary-container rounded-xl pointer-events-none"></div>
+</label>
+</div>
+</div>
+<!-- Form Inputs -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-sm col-span-1 md:col-span-2">
+<label class="block font-label-md text-label-md text-primary" for="doc-title">Document Title</label>
+<input class="w-full h-12 px-md border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all font-body-md text-body-md" id="doc-title" placeholder="e.g., Annual General Meeting Report 2023" type="text"/>
+</div>
+<div class="space-y-sm">
+<label class="block font-label-md text-label-md text-primary" for="expiry-date">Expiry Date (Optional)</label>
+<div class="relative">
+<input class="w-full h-12 px-md border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all font-body-md text-body-md appearance-none" id="expiry-date" type="date"/>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-outline pointer-events-none">calendar_today</span>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="block font-label-md text-label-md text-primary">Visibility</label>
+<select class="w-full h-12 px-md border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary/10 focus:border-primary transition-all font-body-md text-body-md bg-white">
+<option>All Residents</option>
+<option>Committee Members Only</option>
+<option>Specific Block</option>
+</select>
+</div>
+</div>
+<!-- File Upload Area -->
+<div class="space-y-sm">
+<label class="block font-label-md text-label-md text-primary">Upload File</label>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-xl flex flex-col items-center justify-center bg-surface transition-all cursor-pointer hover:border-primary/50" id="drop-zone">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary mb-md">
+<span class="material-symbols-outlined text-[32px]">upload_file</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-primary mb-xs">Drag or tap to upload</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center px-lg">Support for PDF, DOCX, and JPG. Maximum file size: 10MB.</p>
+<input class="hidden" id="file-input" type="file"/>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col md:flex-row gap-md pt-lg">
+<button class="flex-1 bg-primary text-white font-label-md text-label-md py-lg rounded-lg hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined">cloud_upload</span>
+                                Upload Document
+                            </button>
+<button class="px-xl border border-primary text-primary font-label-md text-label-md py-lg rounded-lg hover:bg-surface-container transition-all">
+                                Cancel
+                            </button>
+</div>
+</div>
+</section>
+<!-- Help Alert -->
+<div class="mt-lg p-md bg-secondary-container/10 border border-secondary-container/30 rounded-xl flex gap-md items-start">
+<span class="material-symbols-outlined text-on-secondary-container">info</span>
+<p class="font-body-sm text-body-sm text-on-secondary-container">
+                        Documents uploaded here will be visible to residents in the <strong>Members Portal</strong>. Please ensure no PII (Personally Identifiable Information) is included in public documents.
+                    </p>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-sm border-t border-outline-variant bg-surface shadow-lg rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-all duration-150">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-all duration-150">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-sm text-label-sm">Members</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-150">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-sm text-label-sm">Docs</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-all duration-150">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-sm text-label-sm">Billing</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-all duration-150">
+<span class="material-symbols-outlined">menu</span>
+<span class="font-label-sm text-label-sm">More</span>
+</div>
+</nav>
+<script>
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        ['dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        dropZone.addEventListener('dragover', () => {
+            dropZone.classList.add('drop-zone--active');
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => {
+                dropZone.classList.remove('drop-zone--active');
+            });
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', () => {
+            handleFiles(fileInput.files);
+        });
+
+        function handleFiles(files) {
+            if (files.length > 0) {
+                const fileName = files[0].name;
+                const dropZoneText = dropZone.querySelector('.font-headline-sm');
+                dropZoneText.innerText = `Selected: ${fileName}`;
+                dropZone.querySelector('.material-symbols-outlined').innerText = 'check_circle';
+                dropZone.classList.add('border-on-tertiary-container', 'bg-tertiary-container/5');
+            }
+        }
+    </script>
+</body></html>

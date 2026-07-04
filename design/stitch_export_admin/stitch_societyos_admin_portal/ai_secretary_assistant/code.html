@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SocietyOS AI Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#eeeeec",
+                        "on-secondary-fixed": "#2a1800",
+                        "secondary": "#835400",
+                        "on-surface": "#1a1c1b",
+                        "on-secondary-container": "#6e4600",
+                        "surface-container-highest": "#e2e3e1",
+                        "outline": "#787681",
+                        "outline-variant": "#c8c5d1",
+                        "surface-dim": "#dadad8",
+                        "secondary-fixed-dim": "#ffb956",
+                        "tertiary-container": "#003110",
+                        "primary-fixed": "#e3dfff",
+                        "surface": "#f9f9f7",
+                        "on-primary-container": "#8e8acb",
+                        "on-surface-variant": "#47464f",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f4f4f2",
+                        "on-background": "#1a1c1b",
+                        "tertiary-fixed-dim": "#62df7d",
+                        "tertiary-fixed": "#7ffc97",
+                        "tertiary": "#001a06",
+                        "surface-container-high": "#e8e8e6",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffddb5",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#005320",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9f7",
+                        "inverse-primary": "#c5c0ff",
+                        "primary-container": "#26215c",
+                        "inverse-on-surface": "#f1f1ef",
+                        "on-primary-fixed-variant": "#443f7b",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#17114d",
+                        "surface-tint": "#5b5795",
+                        "primary-fixed-dim": "#c5c0ff",
+                        "on-tertiary-fixed": "#002109",
+                        "secondary-container": "#fdb244",
+                        "on-tertiary-container": "#1ca64c",
+                        "primary": "#110847",
+                        "surface-bright": "#f9f9f7",
+                        "inverse-surface": "#2f3130",
+                        "surface-variant": "#e2e3e1",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xl": "32px",
+                        "container-max": "1440px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "md": "16px",
+                        "rail-width": "240px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "400", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chat-container {
+            height: calc(100vh - 128px);
+        }
+        .bubble-user {
+            border-bottom-right-radius: 2px;
+        }
+        .bubble-ai {
+            border-bottom-left-radius: 2px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- Desktop Navigation Rail (JSON: NavigationDrawer) -->
+<aside class="hidden md:flex fixed left-0 top-0 h-full w-rail-width bg-primary-container dark:bg-primary-container flex-col py-lg z-20">
+<div class="px-lg mb-xl">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-on-primary">Society Secretary</h2>
+<p class="text-[10px] text-on-primary-container opacity-80 uppercase tracking-widest">Maple Heights HOA</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-lg py-md text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="grid_view">grid_view</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center px-lg py-md text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="group">group</span>
+<span class="font-label-md text-label-md">Resident Directory</span>
+</a>
+<a class="flex items-center px-lg py-md text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-md text-label-md">Financial Billing</span>
+</a>
+<a class="flex items-center px-lg py-md text-on-primary border-l-4 border-secondary-container bg-on-primary-fixed-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="smart_toy">smart_toy</span>
+<span class="font-label-md text-label-md">AI Secretary</span>
+</a>
+<a class="flex items-center px-lg py-md text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="campaign">campaign</span>
+<span class="font-label-md text-label-md">Notice Board</span>
+</a>
+<a class="flex items-center px-lg py-md text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-md" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-rail-width min-h-screen flex flex-col relative">
+<!-- TopAppBar (JSON: TopAppBar) -->
+<header class="w-full top-0 sticky z-10 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flex justify-between items-center px-lg h-16 max-w-container-max mx-auto">
+<div class="flex items-center gap-sm">
+<button class="md:hidden p-2">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">SocietyOS</h1>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden sm:flex flex-col items-end">
+<span class="font-label-md text-label-md text-on-surface">Maple Heights Console</span>
+<span class="text-[10px] text-on-surface-variant">Admin Live</span>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged South Asian man wearing a formal blazer, set against a blurred modern office background with soft lighting. The style is crisp and corporate, matching a high-end administrative software interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvQKwS4Y6cJW5RTSsPw2Pu2NP0bbMYKrX3RYm8yYiq6wlyTL52hyKdyGheDCsclUW3RjXf3l6zznlOApLjNCxMChLWe5iw1uTebyPrYH1v6KPwNB-Ws98hulF8IdScnURQsC3qzxMz7UgAxls77cYXLMNB92pUcykL2X_RxsHBS7ZzTRELgI5uCD5Hp5MjJR5HFWenVTYmiQEw0LfnaWjr2bqwQ-hNNVAzQo6RsaS5CyWpcCkpmoxB"/>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed cursor-pointer active:scale-95 transition-transform" data-icon="notifications">notifications</button>
+</div>
+</header>
+<!-- Chat Workspace -->
+<div class="flex-1 flex flex-col px-gutter md:px-lg py-md max-w-4xl mx-auto w-full relative">
+<div class="chat-container overflow-y-auto space-y-lg pb-xl scroll-smooth">
+<!-- System Time Header -->
+<div class="flex justify-center my-lg">
+<span class="bg-surface-container-high px-md py-xs rounded-full font-label-sm text-label-sm text-on-surface-variant">Today, August 1st</span>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end animate-fade-in">
+<div class="max-w-[80%] bg-primary-container text-on-primary p-md rounded-xl bubble-user shadow-sm">
+<p class="font-body-md text-body-md">Prepare AGM notice for 15 August</p>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-xs">10:42 AM</span>
+</div>
+<!-- AI Response -->
+<div class="flex flex-col items-start animate-fade-in">
+<div class="flex gap-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="space-y-md w-full">
+<div class="max-w-[90%] bg-surface-container-high text-on-surface p-md rounded-xl bubble-ai shadow-sm border border-outline-variant">
+<p class="font-body-md text-body-md">I have prepared the draft based on the society's standard template and current bylaws.</p>
+</div>
+<!-- Document Preview Card -->
+<div class="max-w-[90%] glass-card border border-outline-variant rounded-xl overflow-hidden shadow-lg transition-all hover:shadow-xl">
+<div class="bg-primary p-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-primary" data-icon="description">description</span>
+<span class="font-title-lg text-title-lg text-on-primary">AGM_Notice_Aug_2024.pdf</span>
+</div>
+<span class="bg-secondary-container text-on-secondary-fixed px-sm py-xs rounded font-label-sm text-label-sm">DRAFT</span>
+</div>
+<div class="p-lg bg-white/50 space-y-md">
+<div class="border-b border-outline-variant pb-md">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-xs">NOTICE OF ANNUAL GENERAL MEETING</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm italic">Maple Heights Cooperative Housing Society</p>
+</div>
+<div class="text-on-surface space-y-sm font-body-sm text-body-sm leading-relaxed">
+<p>Notice is hereby given that the 15th Annual General Meeting (AGM) of the members of Maple Heights HOA will be held on <strong>Sunday, 15 August 2024</strong> at 10:00 AM in the Society Clubhouse.</p>
+<p><strong>Agenda:</strong></p>
+<ul class="list-disc pl-md space-y-xs">
+<li>Review and adoption of financial statements for FY 2023-24.</li>
+<li>Appointment of auditors for the ensuing year.</li>
+<li>Discussion on upcoming security infrastructure upgrades.</li>
+<li>Miscellaneous matters with the permission of the Chair.</li>
+</ul>
+</div>
+<div class="pt-lg flex flex-wrap gap-md">
+<button class="flex-1 min-w-[140px] flex items-center justify-center gap-xs px-md py-sm border border-primary text-primary font-label-md text-label-md rounded-xl hover:bg-surface-container transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+                                            Edit Draft
+                                        </button>
+<button class="flex-1 min-w-[140px] flex items-center justify-center gap-xs px-md py-sm bg-primary text-on-primary font-label-md text-label-md rounded-xl hover:opacity-90 transition-all active:scale-95 shadow-md">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+                                            Send to Residents
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-xs ml-10">10:43 AM</span>
+</div>
+</div>
+<!-- Chat Input Area -->
+<div class="absolute bottom-4 left-0 w-full px-gutter md:px-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-full flex items-center px-md py-xs shadow-lg ring-1 ring-black/5">
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 px-md font-body-md text-body-md placeholder:text-outline" placeholder="Ask AI to schedule a meeting or draft a mail..." type="text"/>
+<button class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-md hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) (JSON: BottomNavBar) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-sm bg-surface dark:bg-inverse-surface border-t border-outline-variant dark:border-outline shadow-lg rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-sm text-label-sm">Members</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-4 py-1 active:scale-90 transition-all duration-150">
+<span class="material-symbols-outlined" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-label-sm text-label-sm">AI Asst</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+<span class="font-label-sm text-label-sm">Complaints</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+<span class="font-label-sm text-label-sm">More</span>
+</div>
+</nav>
+<script>
+        // Simple micro-interaction for the chat scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatContainer = document.querySelector('.chat-container');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        });
+
+        // Add visual feedback on button clicks
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('opacity-70');
+                setTimeout(() => this.classList.remove('opacity-70'), 100);
+            });
+        });
+    </script>
+</body></html>

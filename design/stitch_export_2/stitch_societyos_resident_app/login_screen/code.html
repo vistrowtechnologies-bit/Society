@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - SocietyHub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#2a1800",
+                        "tertiary-container": "#003110",
+                        "on-primary-fixed-variant": "#443f7b",
+                        "on-primary-container": "#8e8acb",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dadad8",
+                        "on-background": "#1a1c1b",
+                        "surface": "#f9f9f7",
+                        "on-surface-variant": "#47464f",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#005320",
+                        "primary-fixed": "#e3dfff",
+                        "surface-container-highest": "#e2e3e1",
+                        "outline-variant": "#c8c5d1",
+                        "surface-tint": "#5b5795",
+                        "on-secondary-container": "#6e4600",
+                        "inverse-primary": "#c5c0ff",
+                        "secondary-container": "#fdb244",
+                        "on-primary-fixed": "#17114d",
+                        "tertiary": "#001a06",
+                        "on-tertiary-container": "#1ca64c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1c1b",
+                        "tertiary-fixed": "#7ffc97",
+                        "tertiary-fixed-dim": "#62df7d",
+                        "primary-container": "#26215c",
+                        "on-secondary": "#ffffff",
+                        "outline": "#787681",
+                        "inverse-on-surface": "#f1f1ef",
+                        "primary-fixed-dim": "#c5c0ff",
+                        "secondary-fixed-dim": "#ffb956",
+                        "surface-bright": "#f9f9f7",
+                        "secondary-fixed": "#ffddb5",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "surface-container": "#eeeeec",
+                        "inverse-surface": "#2f3130",
+                        "surface-container-high": "#e8e8e6",
+                        "on-error-container": "#93000a",
+                        "primary": "#110847",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary": "#835400",
+                        "surface-variant": "#e2e3e1",
+                        "surface-container-low": "#f4f4f2",
+                        "background": "#f9f9f7",
+                        "on-tertiary-fixed": "#002109"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #F7F7F5;
+            -webkit-font-smoothing: antialiased;
+        }
+        .flat-card {
+            border: 0.5px solid #E5E4DF;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<main class="min-h-screen flex flex-col items-center justify-center p-gutter">
+<!-- Branding Section -->
+<header class="mb-xl flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+<div class="w-12 h-12 mb-md">
+<img alt="SocietyOS Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLsBPmaSGtDt7NGFm2ZYWn8BhA3TuL5duWmNE_JKX47QKdFdtc9sFTkw9as8egpKs37hw1iBypKmo8393EOLalbOERHFUaHkex9ZFFwp2AfSSqdod78m49TSJt7_PD7JRKcJVRwyQkWnLZt-zZf5QYGhaZtKbNF1MqLmEJ7NI2YhLw4Xv17BxmRp5BkNYNVC9sRERazdNmqGOUGPhhmADV2-JVIA9o9ULcoF4FM8k3rIiGGQlRys6j74-7cD"/>
+</div>
+<h1 class="font-headline-md text-headline-md-mobile md:text-headline-md text-primary tracking-tight">SocietyOS</h1>
+</header>
+<!-- Login Form Container -->
+<div class="w-full max-w-[400px] bg-surface-container-lowest rounded-xl flat-card p-xl transition-all duration-300 hover:border-outline-variant">
+<div class="mb-lg">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Welcome back</h2>
+<p class="font-body-md text-on-surface-variant">Sign in to manage your residence</p>
+</div>
+<form class="space-y-gutter" id="loginForm">
+<!-- Email Field -->
+<div class="group">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-sm transition-colors group-focus-within:text-primary" for="email">
+                        Email address
+                    </label>
+<div class="relative">
+<input class="w-full bg-surface-bright border-[0.5px] border-outline-variant rounded-lg px-md py-3 font-body-md text-on-surface focus:ring-0 focus:border-primary-container transition-all placeholder:text-outline" id="email" name="email" placeholder="name@society.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="group">
+<div class="flex justify-between items-center mb-sm">
+<label class="block font-label-md text-label-md text-on-surface-variant transition-colors group-focus-within:text-primary" for="password">
+                            Password
+                        </label>
+<a class="font-label-md text-label-md text-outline hover:text-primary transition-colors" href="#">
+                            Forgot password?
+                        </a>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-bright border-[0.5px] border-outline-variant rounded-lg px-md py-3 font-body-md text-on-surface focus:ring-0 focus:border-primary-container transition-all placeholder:text-outline" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary p-1" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined text-[20px]" id="passwordIcon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center space-x-2 py-xs">
+<input class="w-4 h-4 rounded border-outline-variant text-primary-container focus:ring-primary-fixed cursor-pointer" id="remember" type="checkbox"/>
+<label class="font-body-md text-on-surface-variant select-none cursor-pointer" for="remember">Remember this device</label>
+</div>
+<!-- Action Button -->
+<button class="w-full h-12 bg-primary-container text-on-primary font-headline-sm text-[16px] rounded-xl transition-all duration-200 active:scale-[0.98] hover:bg-[#1a1c4a] shadow-sm flex items-center justify-center gap-2 group" type="submit">
+<span>Sign in</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</form>
+<div class="mt-xl pt-lg border-t border-outline-variant flex flex-col items-center">
+<p class="font-body-md text-on-surface-variant mb-md">New to SocietyOS?</p>
+<button class="font-label-md text-label-md text-on-surface border-[0.5px] border-outline-variant px-xl py-2 rounded-lg hover:bg-surface-container-low transition-colors">
+                    Contact your administrator
+                </button>
+</div>
+</div>
+<!-- Footer Footer (Minimal) -->
+<footer class="mt-xl flex gap-gutter opacity-60">
+<a class="font-label-sm text-label-sm text-outline hover:text-on-surface transition-colors" href="#">Privacy policy</a>
+<span class="text-outline text-label-sm">•</span>
+<a class="font-label-sm text-label-sm text-outline hover:text-on-surface transition-colors" href="#">Terms of service</a>
+</footer>
+</main>
+<script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.getElementById('passwordIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        // Lightweight entrance animations and interaction logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('loginForm');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                
+                // Visual feedback for interaction
+                btn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span>`;
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    btn.innerHTML = `<span>Success</span>`;
+                    btn.classList.replace('bg-primary-container', 'bg-tertiary-container');
+                    btn.classList.add('text-on-tertiary-container');
+                    
+                    setTimeout(() => {
+                        // In a real app, this would redirect
+                        alert('Login simulation complete.');
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        btn.classList.replace('bg-tertiary-container', 'bg-primary-container');
+                        btn.classList.remove('text-on-tertiary-container');
+                    }, 1000);
+                }, 1500);
+            });
+
+            // Smooth focus states handled via Tailwind group classes but adding a micro-vibration on click
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.parentElement.closest('.flat-card').style.borderColor = '#26215C';
+                });
+                input.addEventListener('blur', () => {
+                    input.parentElement.closest('.flat-card').style.borderColor = '#E5E4DF';
+                });
+            });
+        });
+    </script>
+</body></html>

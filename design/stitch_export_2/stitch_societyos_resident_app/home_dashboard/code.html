@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SocietyHub Dashboard</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#2a1800",
+                        "tertiary-container": "#003110",
+                        "on-primary-fixed-variant": "#443f7b",
+                        "on-primary-container": "#8e8acb",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dadad8",
+                        "on-background": "#1a1c1b",
+                        "surface": "#f9f9f7",
+                        "on-surface-variant": "#47464f",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#005320",
+                        "primary-fixed": "#e3dfff",
+                        "surface-container-highest": "#e2e3e1",
+                        "outline-variant": "#c8c5d1",
+                        "surface-tint": "#5b5795",
+                        "on-secondary-container": "#6e4600",
+                        "inverse-primary": "#c5c0ff",
+                        "secondary-container": "#fdb244",
+                        "on-primary-fixed": "#17114d",
+                        "tertiary": "#001a06",
+                        "on-tertiary-container": "#1ca64c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1c1b",
+                        "tertiary-fixed": "#7ffc97",
+                        "tertiary-fixed-dim": "#62df7d",
+                        "primary-container": "#26215c",
+                        "on-secondary": "#ffffff",
+                        "outline": "#787681",
+                        "inverse-on-surface": "#f1f1ef",
+                        "primary-fixed-dim": "#c5c0ff",
+                        "secondary-fixed-dim": "#ffb956",
+                        "surface-bright": "#f9f9f7",
+                        "secondary-fixed": "#ffddb5",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "surface-container": "#eeeeec",
+                        "inverse-surface": "#2f3130",
+                        "surface-container-high": "#e8e8e6",
+                        "on-error-container": "#93000a",
+                        "primary": "#110847",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary": "#835400",
+                        "surface-variant": "#e2e3e1",
+                        "surface-container-low": "#f4f4f2",
+                        "background": "#f9f9f7",
+                        "on-tertiary-fixed": "#002109"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/10">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center w-full px-margin-mobile h-16 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a modern Indian resident in business casual attire. The lighting is soft and flattering, emphasizing a clean, contemporary professional aesthetic. The background is a minimalist solid grey, maintaining focus on the individual. The overall mood is reliable and professional, consistent with a high-end community management application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpFC-hOcHKVFZ9AsS_pjrwj2Xqmajr6VQiwPkCB0mtfZ44h0_NcUjII5H4DcPJgyX22XiK-F3T8SkraEUDwaurXLiwkFnbtZFx4V8VqbEP9BhPR9DLspKuh5FjNupQljAfD94wLbajVS-NjFP33TQgsa-SrxBdbN9Y-fL4p7MjEPcj7_D18MBcE2nBJcs5zfIja_4djHxv1iy5PdVutRQM60ku2RLp4Q31jolyrcSGWa9lzuLpTj_LNA"/>
+</div>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">SocietyHub</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-20 pb-28 px-margin-mobile max-w-lg mx-auto space-y-6">
+<!-- Society Identity Card -->
+<section class="bg-surface-container-lowest rounded-xl border-[0.5px] border-outline-variant p-md flex items-center gap-4 overflow-hidden relative">
+<div class="absolute top-0 right-0 w-24 h-full opacity-10 pointer-events-none">
+
+</div>
+<div class="bg-primary-container p-3 rounded-lg">
+<span class="material-symbols-outlined text-on-primary" data-icon="domain">domain</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Skyline Residency</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Flat 402, Block B</p>
+</div>
+</section>
+<!-- Maintenance Due Card -->
+<section class="bg-surface-container-lowest rounded-xl border-[0.5px] border-outline-variant p-md space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1 uppercase tracking-wider">Current Bill</p>
+<h3 class="font-display-lg-mobile text-display-lg-mobile text-primary">Maintenance due: ₹4,500</h3>
+</div>
+<div class="px-3 py-1 bg-error-container text-on-error-container rounded-lg font-label-md text-label-md">
+                    Due in 5 days
+                </div>
+</div>
+<button class="w-full h-12 bg-[#F2A93B] text-[#1A1A2E] font-bold rounded-xl flex items-center justify-center gap-2 hover:brightness-95 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Pay now
+            </button>
+</section>
+<!-- Quick Actions Bento -->
+<section class="grid grid-cols-4 gap-3">
+<button class="flex flex-col items-center gap-2 p-3 bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+<div class="text-primary-container">
+<span class="material-symbols-outlined text-[28px]" data-icon="receipt_long">receipt_long</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Pay</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+<div class="text-primary-container">
+<span class="material-symbols-outlined text-[28px]" data-icon="feedback">feedback</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Complaints</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+<div class="text-primary-container">
+<span class="material-symbols-outlined text-[28px]" data-icon="folder_open">folder_open</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Docs</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+<div class="text-primary-container">
+<span class="material-symbols-outlined text-[28px]" data-icon="group">group</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Visitors</span>
+</button>
+</section>
+<!-- Notice Feed -->
+<section class="space-y-4">
+<div class="flex justify-between items-center">
+<h4 class="font-headline-sm text-headline-sm text-primary">Recent Notices</h4>
+<button class="font-label-md text-label-md text-primary-container">View all</button>
+</div>
+<div class="bg-surface-container-lowest rounded-xl border-[0.5px] border-outline-variant overflow-hidden">
+<!-- Notice Item 1 -->
+<div class="p-md flex items-start gap-4 hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/30">
+<div class="bg-secondary-container p-2 rounded-lg shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="groups">groups</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">AGM</span>
+<span class="font-label-sm text-label-sm text-outline">2h ago</span>
+</div>
+<h5 class="font-body-lg text-body-lg text-on-surface truncate">Annual General Meeting scheduled for Oct 20th</h5>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Agenda includes park renovation and security upgrade...</p>
+</div>
+</div>
+<!-- Notice Item 2 -->
+<div class="p-md flex items-start gap-4 hover:bg-surface-container-low transition-colors cursor-pointer border-b border-outline-variant/30">
+<div class="bg-tertiary-fixed p-2 rounded-lg shrink-0">
+<span class="material-symbols-outlined text-on-tertiary-fixed" data-icon="construction">construction</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Maintenance</span>
+<span class="font-label-sm text-label-sm text-outline">Yesterday</span>
+</div>
+<h5 class="font-body-lg text-body-lg text-on-surface truncate">Elevator maintenance in Block B</h5>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Service lift will be unavailable from 10 AM to 2 PM.</p>
+</div>
+</div>
+<!-- Notice Item 3 -->
+<div class="p-md flex items-start gap-4 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="bg-primary-fixed p-2 rounded-lg shrink-0">
+<span class="material-symbols-outlined text-on-primary-fixed" data-icon="campaign">campaign</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">General</span>
+<span class="font-label-sm text-label-sm text-outline">3 days ago</span>
+</div>
+<h5 class="font-body-lg text-body-lg text-on-surface truncate">Navratri Celebrations in Clubhouse</h5>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Join us for Dandiya night starting from Oct 15th.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Dynamic Content Card (Bento Style) -->
+<section class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md flex flex-col justify-between h-40 overflow-hidden relative group">
+<div class="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity">
+
+</div>
+<div class="flex justify-between items-start z-10">
+<span class="material-symbols-outlined text-primary-container" data-icon="pool">pool</span>
+<span class="font-label-sm text-label-sm text-tertiary-container bg-tertiary-fixed-dim px-2 py-0.5 rounded-full">Open</span>
+</div>
+<div class="z-10">
+<p class="font-label-md text-label-md text-on-surface-variant">Amenities</p>
+<h6 class="font-headline-sm text-headline-sm text-primary">Pool Access</h6>
+</div>
+</div>
+<div class="bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md flex flex-col justify-between h-40">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary" data-icon="bolt">bolt</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Today</p>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Utility Status</p>
+<h6 class="font-headline-sm text-headline-sm text-primary">No Outage</h6>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-surface border-t border-outline-variant">
+<!-- Home Tab (Active) -->
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container rounded-xl px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<!-- Bills Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest rounded-xl active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-md text-label-md">Bills</span>
+</a>
+<!-- Notices Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest rounded-xl active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+<span class="font-label-md text-label-md">Notices</span>
+</a>
+<!-- Profile Tab -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest rounded-xl active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.active\\:scale-95').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.95)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

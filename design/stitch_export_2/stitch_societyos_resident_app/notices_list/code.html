@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Society Notices | SocietyHub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .notice-card-transition {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
+        }
+        .notice-card-transition:active {
+            transform: scale(0.98);
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c8c5d1;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#2a1800",
+                      "tertiary-container": "#003110",
+                      "on-primary-fixed-variant": "#443f7b",
+                      "on-primary-container": "#8e8acb",
+                      "error-container": "#ffdad6",
+                      "on-primary": "#ffffff",
+                      "surface-dim": "#dadad8",
+                      "on-background": "#1a1c1b",
+                      "surface": "#f9f9f7",
+                      "on-surface-variant": "#47464f",
+                      "error": "#ba1a1a",
+                      "on-tertiary-fixed-variant": "#005320",
+                      "primary-fixed": "#e3dfff",
+                      "surface-container-highest": "#e2e3e1",
+                      "outline-variant": "#c8c5d1",
+                      "surface-tint": "#5b5795",
+                      "on-secondary-container": "#6e4600",
+                      "inverse-primary": "#c5c0ff",
+                      "secondary-container": "#fdb244",
+                      "on-primary-fixed": "#17114d",
+                      "tertiary": "#001a06",
+                      "on-tertiary-container": "#1ca64c",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface": "#1a1c1b",
+                      "tertiary-fixed": "#7ffc97",
+                      "tertiary-fixed-dim": "#62df7d",
+                      "primary-container": "#26215c",
+                      "on-secondary": "#ffffff",
+                      "outline": "#787681",
+                      "inverse-on-surface": "#f1f1ef",
+                      "primary-fixed-dim": "#c5c0ff",
+                      "secondary-fixed-dim": "#ffb956",
+                      "surface-bright": "#f9f9f7",
+                      "secondary-fixed": "#ffddb5",
+                      "on-secondary-fixed-variant": "#633f00",
+                      "surface-container": "#eeeeec",
+                      "inverse-surface": "#2f3130",
+                      "surface-container-high": "#e8e8e6",
+                      "on-error-container": "#93000a",
+                      "primary": "#110847",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "secondary": "#835400",
+                      "surface-variant": "#e2e3e1",
+                      "surface-container-low": "#f4f4f2",
+                      "background": "#f9f9f7",
+                      "on-tertiary-fixed": "#002109"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "lg": "24px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "display-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24">
+<!-- Top AppBar (from Shared Components) -->
+<header class="bg-surface docked full-width top-0 sticky z-50 border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged resident for a modern housing society app. The lighting is soft and natural, emphasizing a friendly and community-oriented atmosphere. The background is a clean, minimalist interior with a palette of soft whites and deep indigos, aligning with a premium Indian residential complex aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCusnhfvxeB1-gs0JGwuCsLfFbl_kSJXUtl6XwWS_GSRbMItZfmTJDag7-irtDuWX8-q5_AbxGlT62okyKSQZnC-hso1SAwYYAwhPXWhB7X77ca4trv7_VL3dorz2ntqZ2XKeu4w6bb6nVoar-nHo2fjTC8uPL6xCF407Ku_vSwEaag7eEXaHlJbVIuM6inQkP9I67Y3egKwn3OTo02BdNnDi1W69POkgL_HfZe1eXOxHpzm5-KpyCBQw"/>
+</div>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">SocietyHub</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</div>
+</header>
+<main class="px-margin-mobile pt-lg max-w-2xl mx-auto">
+<!-- Section Header -->
+<div class="mb-lg">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">Society Notices</h2>
+<p class="font-body-md text-on-surface-variant mt-1">Stay updated with the latest community announcements.</p>
+</div>
+<!-- Notices Filter/Tabs (High-end UI pattern) -->
+<div class="flex gap-2 mb-md overflow-x-auto pb-2 no-scrollbar">
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary font-label-md transition-all active:scale-95">All</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:bg-surface-container transition-all active:scale-95">Meetings</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:bg-surface-container transition-all active:scale-95">Maintenance</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md hover:bg-surface-container transition-all active:scale-95">General</button>
+</div>
+<!-- Notices List -->
+<div class="space-y-md">
+<!-- Notice Card 1: UNREAD -->
+<div class="notice-card-transition bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex gap-md relative cursor-pointer group">
+<!-- Unread Indicator Dot -->
+<div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary-container" title="Unread"></div>
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed">groups</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate pr-6">Annual General Meeting 2024</h3>
+</div>
+<p class="font-label-md text-on-tertiary-container mb-2">Today, 10:30 AM</p>
+<p class="font-body-md text-on-surface-variant line-clamp-2">Dear residents, the AGM for this financial year is scheduled for next Sunday at the Clubhouse. Agenda includes budget approval and security upgrades...</p>
+</div>
+</div>
+<!-- Notice Card 2: Maintenance -->
+<div class="notice-card-transition bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex gap-md cursor-pointer group">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">build</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Elevator Maintenance - Wing B</h3>
+</div>
+<p class="font-label-md text-outline mb-2">Yesterday, 4:15 PM</p>
+<p class="font-body-md text-on-surface-variant line-clamp-2">The left elevator in Wing B will be under scheduled maintenance tomorrow between 10:00 AM and 2:00 PM. Please use the alternate elevator.</p>
+</div>
+</div>
+<!-- Notice Card 3: UNREAD -->
+<div class="notice-card-transition bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex gap-md relative cursor-pointer group">
+<div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary-container"></div>
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed">campaign</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate pr-6">Water Supply Interruption</h3>
+</div>
+<p class="font-label-md text-on-tertiary-container mb-2">Oct 24, 2023</p>
+<p class="font-body-md text-on-surface-variant line-clamp-2">Due to local municipal repairs, water supply will be limited this Friday. Residents are requested to store sufficient water in advance.</p>
+</div>
+</div>
+<!-- Notice Card 4: General -->
+<div class="notice-card-transition bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex gap-md cursor-pointer group">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">park</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">Diwali Mela Registrations</h3>
+</div>
+<p class="font-label-md text-outline mb-2">Oct 22, 2023</p>
+<p class="font-body-md text-on-surface-variant line-clamp-2">Forms for stall bookings at the upcoming Diwali Mela are now available at the Society Office. Last date for registration is Oct 30.</p>
+</div>
+</div>
+<!-- Notice Card 5: General -->
+<div class="notice-card-transition bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex gap-md cursor-pointer group">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">security</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface truncate">New Visitor Policy</h3>
+</div>
+<p class="font-label-md text-outline mb-2">Oct 20, 2023</p>
+<p class="font-body-md text-on-surface-variant line-clamp-2">We are implementing a new digital check-in for visitors starting next month to enhance security. Please ensure your mobile numbers are updated.</p>
+</div>
+</div>
+</div>
+<!-- Empty State Spacer -->
+<div class="h-12"></div>
+</main>
+<!-- Bottom Navigation Bar (from Shared Components) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-surface border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors rounded-xl active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors rounded-xl active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md mt-1">Bills</span>
+</a>
+<!-- Active Tab: Notices -->
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container rounded-xl px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span class="font-label-md text-label-md mt-1">Notices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors rounded-xl active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction: Mark as read on click
+        document.querySelectorAll('.notice-card-transition').forEach(card => {
+            card.addEventListener('click', function() {
+                const dot = this.querySelector('.bg-primary-container');
+                if (dot) {
+                    dot.style.opacity = '0';
+                    setTimeout(() => dot.remove(), 200);
+                }
+            });
+        });
+
+        // Tab selection logic
+        const filterButtons = document.querySelectorAll('.flex.gap-2.mb-md button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-primary-container', 'text-on-primary');
+                    b.classList.add('border', 'border-outline-variant', 'text-on-surface-variant');
+                });
+                btn.classList.add('bg-primary-container', 'text-on-primary');
+                btn.classList.remove('border', 'border-outline-variant', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

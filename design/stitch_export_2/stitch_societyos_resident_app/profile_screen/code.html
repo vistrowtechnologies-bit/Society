@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile - SocietyHub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#2a1800",
+                    "tertiary-container": "#003110",
+                    "on-primary-fixed-variant": "#443f7b",
+                    "on-primary-container": "#8e8acb",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#dadad8",
+                    "on-background": "#1a1c1b",
+                    "surface": "#f9f9f7",
+                    "on-surface-variant": "#47464f",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#005320",
+                    "primary-fixed": "#e3dfff",
+                    "surface-container-highest": "#e2e3e1",
+                    "outline-variant": "#c8c5d1",
+                    "surface-tint": "#5b5795",
+                    "on-secondary-container": "#6e4600",
+                    "inverse-primary": "#c5c0ff",
+                    "secondary-container": "#fdb244",
+                    "on-primary-fixed": "#17114d",
+                    "tertiary": "#001a06",
+                    "on-tertiary-container": "#1ca64c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1a1c1b",
+                    "tertiary-fixed": "#7ffc97",
+                    "tertiary-fixed-dim": "#62df7d",
+                    "primary-container": "#26215c",
+                    "on-secondary": "#ffffff",
+                    "outline": "#787681",
+                    "inverse-on-surface": "#f1f1ef",
+                    "primary-fixed-dim": "#c5c0ff",
+                    "secondary-fixed-dim": "#ffb956",
+                    "surface-bright": "#f9f9f7",
+                    "secondary-fixed": "#ffddb5",
+                    "on-secondary-fixed-variant": "#633f00",
+                    "surface-container": "#eeeeec",
+                    "inverse-surface": "#2f3130",
+                    "surface-container-high": "#e8e8e6",
+                    "on-error-container": "#93000a",
+                    "primary": "#110847",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary": "#835400",
+                    "surface-variant": "#e2e3e1",
+                    "surface-container-low": "#f4f4f2",
+                    "background": "#f9f9f7",
+                    "on-tertiary-fixed": "#002109"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f7;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-pill {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- Top App Bar -->
+<header class="bg-surface docked full-width top-0 z-50 flex justify-between items-center w-full px-margin-mobile h-16 border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a friendly Indian man in his late 30s, Rahul Sharma, with a clean-shaven look and short black hair. He is wearing a sophisticated navy blue polo shirt. The background is a soft, blurred modern architectural interior with warm wooden accents and bright natural light, maintaining a premium and trustworthy aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYOKPah8HMRmBYX422FHlTbVFD2sa5qDehfJeXDi5tAbBvoNlEBHjXcMSCdmbSMqbOPlNE7qw-54rkKUK7nCgS0WJqbqB_C8lnuyxnx1Fd204toMxP7SwJ65BYDrYVIji2H6QmKxXYo8X0U6aFeoc0YfFYqQ1pt-Zgp_sEmqhwC9fkk67PfAKwcH9JNzeaRfK_eM-2GwbJEw6hAGgowN_GPChHLoDaSfnbSll3zsZlWbOwmnpxohioog"/>
+</div>
+<span class="font-headline-md text-headline-md-mobile text-primary">SocietyHub</span>
+</div>
+<button class="hover:bg-surface-container-low transition-colors p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</header>
+<main class="pb-32">
+<!-- Hero Profile Section -->
+<section class="px-margin-mobile pt-lg pb-lg flex flex-col items-center">
+<div class="relative mb-md">
+<div class="w-32 h-32 rounded-full border-2 border-primary-container overflow-hidden p-1 bg-surface">
+<img class="w-full h-full object-cover rounded-full" data-alt="A close-up professional headshot of a smiling man named Rahul Sharma with a modern haircut. The image is bright and airy, with soft shadows and a high-key lighting setup. The background is a minimal, off-white texture that complements the SocietyHub design language of professional reliability and modern efficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiL9N4K8RUesdZlrD-f0goPR9k0vN2UsLHHRPtMoITixLLcxgleSnfudO9URCHheMm8zvTqdSxjpJWIAwdWd-MB-lm51Ei5YmSyXIj227DAe91VTVgzd22RIBxg0Hionq4_B6O6i_qEN9bycSNSwDzxqVDA-ibTnjxtq_AS8C5Y-uOrYXzBi5y7WEJv8zbwxW4Gsl23WEHvsXFTlRJtLq-_TAFN78C4gkhrr3-eumj1TNUc2K_uG-Cvg"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center border-2 border-surface">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+</div>
+<h1 class="font-headline-md text-headline-md-mobile text-on-surface mb-xs">Rahul Sharma</h1>
+<div class="flex items-center gap-2 text-on-surface-variant mb-lg">
+<span class="material-symbols-outlined text-[18px]">apartment</span>
+<span class="font-body-md text-body-md">Block B, 1204</span>
+</div>
+<!-- Contact Chips -->
+<div class="grid grid-cols-1 w-full gap-sm">
+<div class="bg-surface border-[0.5px] border-outline-variant rounded-xl p-md flex items-center gap-4 transition-all hover:bg-surface-container-low">
+<div class="bg-primary-container/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">phone</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant">Mobile</span>
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">+91 98765 43210</span>
+</div>
+</div>
+<div class="bg-surface border-[0.5px] border-outline-variant rounded-xl p-md flex items-center gap-4 transition-all hover:bg-surface-container-low">
+<div class="bg-primary-container/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">mail</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant">Email</span>
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">rahul.sharma@domain.com</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Settings List -->
+<section class="px-margin-mobile">
+<div class="bg-surface border-[0.5px] border-outline-variant rounded-xl overflow-hidden">
+<!-- Edit Profile -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-container-low active:bg-surface-container transition-colors border-b border-outline-variant last:border-0 group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">person_edit</span>
+<span class="font-body-lg text-body-lg text-on-surface">Edit Profile</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<!-- Notification Settings -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-container-low active:bg-surface-container transition-colors border-b border-outline-variant last:border-0 group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">notifications_active</span>
+<span class="font-body-lg text-body-lg text-on-surface">Notification Settings</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+<!-- About SocietyOS -->
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-container-low active:bg-surface-container transition-colors border-b border-outline-variant last:border-0 group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">info</span>
+<span class="font-body-lg text-body-lg text-on-surface">About SocietyOS</span>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+</div>
+<!-- Logout Button -->
+<button class="w-full mt-lg bg-surface border-[0.5px] border-error/30 rounded-xl p-md flex items-center justify-center gap-2 text-error hover:bg-error-container/20 active:scale-[0.98] transition-all duration-200">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-headline-sm text-headline-sm">Logout</span>
+</button>
+</section>
+<!-- Aesthetic Decoration -->
+<div class="mt-xl px-margin-mobile text-center">
+<p class="font-label-md text-label-md text-outline">Version 2.4.1 (Stable)</p>
+<p class="font-label-sm text-label-sm text-outline mt-xs">Powered by SocietyOS Labs</p>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-surface border-t border-outline-variant">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest rounded-xl active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<!-- Bills -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest rounded-xl active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Bills</span>
+</a>
+<!-- Notices -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest rounded-xl active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-label-md text-label-md">Notices</span>
+</a>
+<!-- Profile (Active) -->
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container rounded-xl px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md font-bold">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for list items
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.classList.add('opacity-80');
+            });
+            btn.addEventListener('touchend', function() {
+                this.classList.remove('opacity-80');
+            });
+        });
+
+        // Simple scroll behavior for header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('bg-white/95', 'backdrop-blur-md');
+            } else {
+                header.classList.remove('bg-white/95', 'backdrop-blur-md');
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SocietyOS Splash Screen</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#2a1800",
+                        "tertiary-container": "#003110",
+                        "on-primary-fixed-variant": "#443f7b",
+                        "on-primary-container": "#8e8acb",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dadad8",
+                        "on-background": "#1a1c1b",
+                        "surface": "#f9f9f7",
+                        "on-surface-variant": "#47464f",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#005320",
+                        "primary-fixed": "#e3dfff",
+                        "surface-container-highest": "#e2e3e1",
+                        "outline-variant": "#c8c5d1",
+                        "surface-tint": "#5b5795",
+                        "on-secondary-container": "#6e4600",
+                        "inverse-primary": "#c5c0ff",
+                        "secondary-container": "#fdb244",
+                        "on-primary-fixed": "#17114d",
+                        "tertiary": "#001a06",
+                        "on-tertiary-container": "#1ca64c",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1c1b",
+                        "tertiary-fixed": "#7ffc97",
+                        "tertiary-fixed-dim": "#62df7d",
+                        "primary-container": "#26215c",
+                        "on-secondary": "#ffffff",
+                        "outline": "#787681",
+                        "inverse-on-surface": "#f1f1ef",
+                        "primary-fixed-dim": "#c5c0ff",
+                        "secondary-fixed-dim": "#ffb956",
+                        "surface-bright": "#f9f9f7",
+                        "secondary-fixed": "#ffddb5",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "surface-container": "#eeeeec",
+                        "inverse-surface": "#2f3130",
+                        "surface-container-high": "#e8e8e6",
+                        "on-error-container": "#93000a",
+                        "primary": "#110847",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary": "#835400",
+                        "surface-variant": "#e2e3e1",
+                        "surface-container-low": "#f4f4f2",
+                        "background": "#f9f9f7",
+                        "on-tertiary-fixed": "#002109"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #26215c;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .splash-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #26215c;
+            position: relative;
+        }
+
+        /* Entrance Animation for Logo */
+        .animate-entrance {
+            animation: logo-fade-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        @keyframes logo-fade-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Subtle Background Atmosphere */
+        .bg-glow {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, rgba(82, 74, 184, 0.3) 0%, rgba(38, 33, 92, 0) 70%);
+            pointer-events: none;
+        }
+
+        /* Loading Indicator */
+        .loading-bar-container {
+            position: absolute;
+            bottom: 64px;
+            width: 120px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .loading-bar-progress {
+            height: 100%;
+            background-color: #F2A93B; /* Accent color from logo description */
+            width: 0%;
+            animation: load-progress 2.5s ease-in-out forwards;
+        }
+
+        @keyframes load-progress {
+            0% { width: 0%; }
+            20% { width: 10%; }
+            50% { width: 45%; }
+            80% { width: 90%; }
+            100% { width: 100%; }
+        }
+
+        .footer-brand {
+            position: absolute;
+            bottom: 32px;
+            opacity: 0;
+            animation: fade-up 0.8s ease-out 0.5s forwards;
+        }
+
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 0.6;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Main Splash Wrapper -->
+<div class="splash-container">
+<!-- Subtle Animated Atmosphere Overlay -->
+<div class="bg-glow"></div>
+<!-- Centered Branding Cluster -->
+<div class="flex flex-col items-center justify-center animate-entrance z-10">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-xl overflow-hidden flex items-center justify-center">
+<!-- SocietyOS Logo (Image 2) -->
+<img alt="SocietyOS Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLsBPmaSGtDt7NGFm2ZYWn8BhA3TuL5duWmNE_JKX47QKdFdtc9sFTkw9as8egpKs37hw1iBypKmo8393EOLalbOERHFUaHkex9ZFFwp2AfSSqdod78m49TSJt7_PD7JRKcJVRwyQkWnLZt-zZf5QYGhaZtKbNF1MqLmEJ7NI2YhLw4Xv17BxmRp5BkNYNVC9sRERazdNmqGOUGPhhmADV2-JVIA9o9ULcoF4FM8k3rIiGGQlRys6j74-7cD"/>
+</div>
+<!-- Logo Wordmark (Hidden in CSS if logo already contains text, but added here for semantic structure) -->
+<h1 class="mt-8 font-display-lg text-display-lg-mobile md:text-display-lg text-white tracking-tight">
+                SocietyOS
+            </h1>
+<p class="mt-2 font-label-md text-label-md text-on-primary-container opacity-80 uppercase tracking-widest">
+                Modern Community Living
+            </p>
+</div>
+<!-- Minimalist Loading State -->
+<div class="loading-bar-container">
+<div class="loading-bar-progress"></div>
+</div>
+<!-- Legal/Footer Anchor -->
+<div class="footer-brand flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-white mb-1">Empowering Housing Societies</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-white">verified</span>
+<span class="font-label-sm text-label-sm text-white uppercase tracking-tighter">Powered by SocietyHub</span>
+</div>
+</div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Optional: Simulate a smooth exit transition after the loading bar finishes
+            setTimeout(() => {
+                const splash = document.querySelector('.splash-container');
+                // In a real app, this would trigger a window location change or state update
+                // splash.style.opacity = '0';
+                // splash.style.transition = 'opacity 0.5s ease-out';
+            }, 3000);
+        });
+    </script>
+</body></html>

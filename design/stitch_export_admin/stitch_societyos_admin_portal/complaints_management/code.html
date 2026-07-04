@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SocietyOS | Complaints Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#eeeeec",
+                        "on-secondary-fixed": "#2a1800",
+                        "secondary": "#835400",
+                        "on-surface": "#1a1c1b",
+                        "on-secondary-container": "#6e4600",
+                        "surface-container-highest": "#e2e3e1",
+                        "outline": "#787681",
+                        "outline-variant": "#c8c5d1",
+                        "surface-dim": "#dadad8",
+                        "secondary-fixed-dim": "#ffb956",
+                        "tertiary-container": "#003110",
+                        "primary-fixed": "#e3dfff",
+                        "surface": "#f9f9f7",
+                        "on-primary-container": "#8e8acb",
+                        "on-surface-variant": "#47464f",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f4f4f2",
+                        "on-background": "#1a1c1b",
+                        "tertiary-fixed-dim": "#62df7d",
+                        "tertiary-fixed": "#7ffc97",
+                        "tertiary": "#001a06",
+                        "surface-container-high": "#e8e8e6",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffddb5",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#005320",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f9f9f7",
+                        "inverse-primary": "#c5c0ff",
+                        "primary-container": "#26215c",
+                        "inverse-on-surface": "#f1f1ef",
+                        "on-primary-fixed-variant": "#443f7b",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#17114d",
+                        "surface-tint": "#5b5795",
+                        "primary-fixed-dim": "#c5c0ff",
+                        "on-tertiary-fixed": "#002109",
+                        "secondary-container": "#fdb244",
+                        "on-tertiary-container": "#1ca64c",
+                        "primary": "#110847",
+                        "surface-bright": "#f9f9f7",
+                        "inverse-surface": "#2f3130",
+                        "surface-variant": "#e2e3e1",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xl": "32px",
+                        "container-max": "1440px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "md": "16px",
+                        "rail-width": "240px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .complaint-card:hover {
+            box-shadow: 0 4px 12px rgba(38, 33, 92, 0.04);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e3e1; border-radius: 10px; }
+        .tab-active { border-bottom: 3px solid #fdb244; color: #110847; font-weight: 700; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- Navigation Rail (Desktop Only) -->
+<aside class="hidden md:flex fixed left-0 top-0 h-full w-rail-width bg-primary-container flex-col py-lg z-30 overflow-y-auto">
+<div class="px-lg mb-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-container text-display-lg" style="font-variation-settings: 'FILL' 1;">domain</span>
+<h1 class="font-headline-md text-headline-md text-on-primary">SocietyOS</h1>
+</div>
+<div class="flex-1 flex flex-col gap-1 px-sm">
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Resident Directory</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Financial Billing</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-primary border-l-4 border-secondary-container bg-on-primary-fixed-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined">report_problem</span>
+<span class="font-label-md text-label-md">Complaints</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-label-md text-label-md">Notice Board</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+<div class="px-lg mt-auto pt-lg border-t border-on-primary-fixed-variant/30">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a middle-aged male housing society secretary with a warm, welcoming expression, wearing a crisp formal shirt, set against a blurred modern office background with soft daylighting. The style is clean and corporate professional with warm undertones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAeH85GKn9GZuuhkThbVYCjraC507cpu5M6zNtkwIdBfdMV7LPMKTybCqnklkuwoc9YbXszGlplC3F7U6uZloFAqEhKqRDquY1Z0l1GQIhIfpwBuClqZJw2WMfMJa14dcoMeihatIX297kKPEfmAIksJXya44pbcxdrnc2D3CoINrJ30xwKkUMOC4xm7UZOjkLuBYRO5_cPdbbWwqCerF79QedR2Z7ennD1wsogldH-gP0N-JuvpOi"/>
+</div>
+<div class="overflow-hidden">
+<p class="font-label-md text-label-md text-on-primary truncate">Secretary Admin</p>
+<p class="text-[10px] text-on-primary-container truncate uppercase tracking-widest">Maple Heights</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-rail-width min-h-screen pb-24 md:pb-8 flex flex-col">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-40 bg-surface border-b border-outline-variant w-full h-16 flex justify-between items-center px-lg">
+<div class="flex items-center gap-4">
+<span class="md:hidden material-symbols-outlined text-primary cursor-pointer">menu</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Complaints Management</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex relative">
+<input class="pl-10 pr-4 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest font-body-sm text-body-sm focus:border-primary focus:ring-1 focus:ring-primary/10 outline-none w-64" placeholder="Search tickets..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[20px]">search</span>
+</div>
+<button class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 max-w-container-max mx-auto w-full px-gutter pt-lg">
+<!-- Quick Stats Bento Section -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col justify-between">
+<span class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Total Active</span>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="font-headline-md text-headline-md text-primary">42</span>
+<span class="text-[12px] text-on-tertiary-container bg-tertiary-fixed rounded px-1.5">+3 new</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col justify-between">
+<span class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Avg. Response</span>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="font-headline-md text-headline-md text-primary">4.2h</span>
+<span class="text-[12px] text-on-surface-variant">-12%</span>
+</div>
+</div>
+<div class="md:col-span-2 bg-primary-container rounded-xl p-lg relative overflow-hidden flex items-center">
+<div class="relative z-10">
+<h3 class="text-on-primary font-title-lg text-title-lg mb-1">Weekly Resolution Target</h3>
+<p class="text-on-primary-container text-body-sm max-w-[280px]">You have resolved 18 out of 25 predicted issues this week.</p>
+<div class="mt-4 w-full bg-primary rounded-full h-2">
+<div class="bg-secondary-container h-2 rounded-full w-[72%]"></div>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] text-on-primary opacity-5 transform -rotate-12">task_alt</span>
+</div>
+</section>
+<!-- Status Tabs -->
+<nav class="flex border-b border-outline-variant mb-6 gap-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
+<button class="tab-active py-4 px-2 font-label-md text-label-md transition-all" id="tab-open" onclick="switchTab('open')">OPEN (12)</button>
+<button class="text-on-surface-variant py-4 px-2 font-label-md text-label-md hover:text-primary transition-all" id="tab-progress" onclick="switchTab('progress')">IN PROGRESS (24)</button>
+<button class="text-on-surface-variant py-4 px-2 font-label-md text-label-md hover:text-primary transition-all" id="tab-resolved" onclick="switchTab('resolved')">RESOLVED (108)</button>
+</nav>
+<!-- Complaint Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter" id="complaints-container">
+<!-- Ticket Card 1 -->
+<div class="complaint-card bg-surface-container-lowest border border-outline-variant rounded-xl p-lg transition-all flex flex-col md:flex-row gap-gutter">
+<div class="flex-1">
+<div class="flex items-center justify-between mb-2">
+<span class="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-md text-[10px] tracking-widest">#TC-8821</span>
+<span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-[11px]">
+<span class="material-symbols-outlined text-[14px]">water_drop</span> Plumbing
+                            </span>
+</div>
+<h4 class="font-title-lg text-title-lg text-primary mb-2">Major leakage in basement area</h4>
+<p class="text-on-surface-variant text-body-sm line-clamp-2 mb-4">Resident from Block C-402 reports significant water seepage coming from the ceiling of the visitor parking area...</p>
+<div class="flex items-center gap-4 mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-primary">RK</div>
+<span class="text-label-md text-on-surface-variant">Rohan Kapoor</span>
+</div>
+<span class="text-[11px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 2h ago
+                            </span>
+</div>
+</div>
+<div class="md:w-48 flex flex-col justify-between border-t md:border-t-0 md:border-l border-outline-variant pt-4 md:pt-0 md:pl-4">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Update Status</label>
+<select class="w-full bg-surface border border-outline-variant rounded-lg px-3 py-2 font-body-sm text-body-sm focus:border-primary outline-none cursor-pointer">
+<option selected="">Open</option>
+<option>In Progress</option>
+<option>Resolved</option>
+</select>
+</div>
+<button class="w-full mt-4 md:mt-0 bg-primary text-on-primary py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95">
+                            View Details
+                        </button>
+</div>
+</div>
+<!-- Ticket Card 2 -->
+<div class="complaint-card bg-surface-container-lowest border border-outline-variant rounded-xl p-lg transition-all flex flex-col md:flex-row gap-gutter">
+<div class="flex-1">
+<div class="flex items-center justify-between mb-2">
+<span class="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-md text-[10px] tracking-widest">#TC-8819</span>
+<span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-md text-[11px]">
+<span class="material-symbols-outlined text-[14px]">security</span> Security
+                            </span>
+</div>
+<h4 class="font-title-lg text-title-lg text-primary mb-2">Unidentified vehicle in slot P-22</h4>
+<p class="text-on-surface-variant text-body-sm line-clamp-2 mb-4">A silver sedan with plate MH-01-XX-9999 has been parked in my designated spot since yesterday evening...</p>
+<div class="flex items-center gap-4 mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-primary">SA</div>
+<span class="text-label-md text-on-surface-variant">Sneha Arya</span>
+</div>
+<span class="text-[11px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 5h ago
+                            </span>
+</div>
+</div>
+<div class="md:w-48 flex flex-col justify-between border-t md:border-t-0 md:border-l border-outline-variant pt-4 md:pt-0 md:pl-4">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Update Status</label>
+<select class="w-full bg-surface border border-outline-variant rounded-lg px-3 py-2 font-body-sm text-body-sm focus:border-primary outline-none cursor-pointer">
+<option selected="">Open</option>
+<option>In Progress</option>
+<option>Resolved</option>
+</select>
+</div>
+<button class="w-full mt-4 md:mt-0 bg-primary text-on-primary py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95">
+                            View Details
+                        </button>
+</div>
+</div>
+<!-- Ticket Card 3 -->
+<div class="complaint-card bg-surface-container-lowest border border-outline-variant rounded-xl p-lg transition-all flex flex-col md:flex-row gap-gutter">
+<div class="flex-1">
+<div class="flex items-center justify-between mb-2">
+<span class="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-md text-[10px] tracking-widest">#TC-8815</span>
+<span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-md text-[11px]">
+<span class="material-symbols-outlined text-[14px]">bolt</span> Electrical
+                            </span>
+</div>
+<h4 class="font-title-lg text-title-lg text-primary mb-2">Corridor lights flickering</h4>
+<p class="text-on-surface-variant text-body-sm line-clamp-2 mb-4">All lights in the 12th-floor corridor of Tower B are flickering constantly. Likely a loose connection or voltage issue.</p>
+<div class="flex items-center gap-4 mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-primary">JD</div>
+<span class="text-label-md text-on-surface-variant">John Doe</span>
+</div>
+<span class="text-[11px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 1d ago
+                            </span>
+</div>
+</div>
+<div class="md:w-48 flex flex-col justify-between border-t md:border-t-0 md:border-l border-outline-variant pt-4 md:pt-0 md:pl-4">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Update Status</label>
+<select class="w-full bg-surface border border-outline-variant rounded-lg px-3 py-2 font-body-sm text-body-sm focus:border-primary outline-none cursor-pointer">
+<option selected="">Open</option>
+<option>In Progress</option>
+<option>Resolved</option>
+</select>
+</div>
+<button class="w-full mt-4 md:mt-0 bg-primary text-on-primary py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95">
+                            View Details
+                        </button>
+</div>
+</div>
+<!-- Ticket Card 4 -->
+<div class="complaint-card bg-surface-container-lowest border border-outline-variant rounded-xl p-lg transition-all flex flex-col md:flex-row gap-gutter">
+<div class="flex-1">
+<div class="flex items-center justify-between mb-2">
+<span class="bg-surface-container px-2.5 py-1 rounded-md text-on-surface-variant font-label-md text-[10px] tracking-widest">#TC-8812</span>
+<span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-[11px]">
+<span class="material-symbols-outlined text-[14px]">cleaning_services</span> Maintenance
+                            </span>
+</div>
+<h4 class="font-title-lg text-title-lg text-primary mb-2">Garbage collection missed</h4>
+<p class="text-on-surface-variant text-body-sm line-clamp-2 mb-4">Garbage collector hasn't visited the 5th floor units today. The bins are overflowing and causing odor issues.</p>
+<div class="flex items-center gap-4 mt-auto">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-primary">AM</div>
+<span class="text-label-md text-on-surface-variant">Amit Mehra</span>
+</div>
+<span class="text-[11px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 1d ago
+                            </span>
+</div>
+</div>
+<div class="md:w-48 flex flex-col justify-between border-t md:border-t-0 md:border-l border-outline-variant pt-4 md:pt-0 md:pl-4">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Update Status</label>
+<select class="w-full bg-surface border border-outline-variant rounded-lg px-3 py-2 font-body-sm text-body-sm focus:border-primary outline-none cursor-pointer">
+<option selected="">Open</option>
+<option>In Progress</option>
+<option>Resolved</option>
+</select>
+</div>
+<button class="w-full mt-4 md:mt-0 bg-primary text-on-primary py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95">
+                            View Details
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-sm border-t border-outline-variant bg-surface shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-sm text-label-sm">Members</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-sm text-label-sm">Billing</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">report_problem</span>
+<span class="font-label-sm text-label-sm">Complaints</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined">menu</span>
+<span class="font-label-sm text-label-sm">More</span>
+</a>
+</nav>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 md:bottom-8 md:right-8 w-14 h-14 bg-secondary-container text-on-secondary-fixed shadow-lg rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<script>
+        function switchTab(tab) {
+            const tabs = ['open', 'progress', 'resolved'];
+            tabs.forEach(t => {
+                const el = document.getElementById('tab-' + t);
+                if (t === tab) {
+                    el.classList.add('tab-active');
+                    el.classList.remove('text-on-surface-variant');
+                } else {
+                    el.classList.remove('tab-active');
+                    el.classList.add('text-on-surface-variant');
+                }
+            });
+            
+            // Artificial loading state for demo
+            const container = document.getElementById('complaints-container');
+            container.style.opacity = '0.3';
+            setTimeout(() => {
+                container.style.opacity = '1';
+            }, 300);
+        }
+
+        // Micro-interaction for cards
+        document.querySelectorAll('.complaint-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

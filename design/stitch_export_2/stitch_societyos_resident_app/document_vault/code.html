@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SocietyHub - Document Vault</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .folder-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .folder-transition:active {
+            transform: scale(0.96);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md antialiased mb-24">
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-secondary-fixed": "#2a1800",
+                "tertiary-container": "#003110",
+                "on-primary-fixed-variant": "#443f7b",
+                "on-primary-container": "#8e8acb",
+                "error-container": "#ffdad6",
+                "on-primary": "#ffffff",
+                "surface-dim": "#dadad8",
+                "on-background": "#1a1c1b",
+                "surface": "#f9f9f7",
+                "on-surface-variant": "#47464f",
+                "error": "#ba1a1a",
+                "on-tertiary-fixed-variant": "#005320",
+                "primary-fixed": "#e3dfff",
+                "surface-container-highest": "#e2e3e1",
+                "outline-variant": "#c8c5d1",
+                "surface-tint": "#5b5795",
+                "on-secondary-container": "#6e4600",
+                "inverse-primary": "#c5c0ff",
+                "secondary-container": "#fdb244",
+                "on-primary-fixed": "#17114d",
+                "tertiary": "#001a06",
+                "on-tertiary-container": "#1ca64c",
+                "surface-container-lowest": "#ffffff",
+                "on-surface": "#1a1c1b",
+                "tertiary-fixed": "#7ffc97",
+                "tertiary-fixed-dim": "#62df7d",
+                "primary-container": "#26215c",
+                "on-secondary": "#ffffff",
+                "outline": "#787681",
+                "inverse-on-surface": "#f1f1ef",
+                "primary-fixed-dim": "#c5c0ff",
+                "secondary-fixed-dim": "#ffb956",
+                "surface-bright": "#f9f9f7",
+                "secondary-fixed": "#ffddb5",
+                "on-secondary-fixed-variant": "#633f00",
+                "surface-container": "#eeeeec",
+                "inverse-surface": "#2f3130",
+                "surface-container-high": "#e8e8e6",
+                "on-error-container": "#93000a",
+                "primary": "#110847",
+                "on-tertiary": "#ffffff",
+                "on-error": "#ffffff",
+                "secondary": "#835400",
+                "surface-variant": "#e2e3e1",
+                "surface-container-low": "#f4f4f2",
+                "background": "#f9f9f7",
+                "on-tertiary-fixed": "#002109"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "base": "4px",
+                "lg": "24px",
+                "gutter": "16px",
+                "xs": "4px",
+                "sm": "8px",
+                "md": "16px",
+                "xl": "32px",
+                "margin-mobile": "16px",
+                "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                "body-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "label-sm": ["Inter"],
+                "label-md": ["Inter"],
+                "display-lg": ["Inter"],
+                "headline-sm": ["Inter"],
+                "headline-md": ["Inter"],
+                "display-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<!-- Top AppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center w-full px-margin-mobile h-16 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional high-quality headshot of a resident for a premium housing society application. The lighting is soft and studio-quality, emphasizing a friendly yet professional demeanor. The background is a clean, modern interior with neutral tones consistent with the SocietyHub design system. The person is dressed in smart-casual business attire." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhAj6T4xKuncHT4wIcW9QJkyg5liD2lnBkZx9gXJUdOZSYaaZ9NqxZKSR2hhzKxkvzbuf-bU6UW2z0O7wiwajF2_84bta2-8MvO8OpIj8pAiU_q-h6ZN5sSP5ncIRbg6I1Fk4POML-6VWLPVNj_hkTVM4seqSs9BoAL-mRLKqrsRbRItPLDM88YarpPo21GQ03R-Ox-2ze0vPrb4pkkpWFJBTDZs9OfAEiqp5Xd6vyTQ2C5Vtvbwhupg"/>
+</div>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">SocietyHub</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="mt-20 px-margin-mobile">
+<!-- Header Section -->
+<section class="mb-lg">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Document Vault</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Official society records and legal papers</p>
+</div>
+<button class="bg-primary-container text-on-primary rounded-xl px-4 py-2 flex items-center gap-2 hover:bg-primary transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+<span class="font-label-md text-label-md">Upload</span>
+</button>
+</div>
+</section>
+<!-- Search & Filter Bar -->
+<section class="mb-gutter">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-xl focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all font-body-md text-body-md" placeholder="Search for files..." type="text"/>
+</div>
+</section>
+<!-- Category Grid (Folder View) -->
+<section class="grid grid-cols-2 gap-gutter mb-lg">
+<!-- Bye-laws Folder -->
+<div class="bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md folder-transition cursor-pointer flex flex-col gap-3">
+<div class="w-12 h-12 flex items-center justify-center bg-secondary-fixed rounded-lg">
+<span class="material-symbols-outlined text-on-secondary-fixed text-[28px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-[16px] text-on-surface leading-tight">Bye-laws</h3>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">12 Files</p>
+</div>
+</div>
+<!-- AGM Minutes Folder -->
+<div class="bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md folder-transition cursor-pointer flex flex-col gap-3">
+<div class="w-12 h-12 flex items-center justify-center bg-primary-fixed rounded-lg">
+<span class="material-symbols-outlined text-on-primary-fixed text-[28px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-[16px] text-on-surface leading-tight">AGM minutes</h3>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">45 Files</p>
+</div>
+</div>
+<!-- Certificates Folder -->
+<div class="bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md folder-transition cursor-pointer flex flex-col gap-3">
+<div class="w-12 h-12 flex items-center justify-center bg-tertiary-fixed rounded-lg">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-[28px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-[16px] text-on-surface leading-tight">Certificates</h3>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">08 Files</p>
+</div>
+</div>
+<!-- Circulars Folder -->
+<div class="bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md folder-transition cursor-pointer flex flex-col gap-3">
+<div class="w-12 h-12 flex items-center justify-center bg-outline-variant rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant text-[28px]" style="font-variation-settings: 'FILL' 1;">folder</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-[16px] text-on-surface leading-tight">Circulars</h3>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">112 Files</p>
+</div>
+</div>
+</section>
+<!-- Recent Documents (List View for Variety) -->
+<section class="mb-lg">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-headline-sm text-[18px] text-on-surface">Recent Documents</h3>
+<button class="font-label-md text-primary hover:underline">See all</button>
+</div>
+<div class="bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl overflow-hidden">
+<!-- Document Item 1 -->
+<div class="flex items-center p-md border-b-[0.5px] border-outline-variant hover:bg-surface-container-low transition-colors cursor-pointer min-h-[48px]">
+<div class="w-10 h-10 flex items-center justify-center bg-red-50 text-red-600 rounded-lg mr-md">
+<span class="material-symbols-outlined text-[24px]">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<h4 class="font-body-md text-body-md text-on-surface font-medium truncate">Annual_Report_2023.pdf</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">2.4 MB • 2 days ago</p>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</button>
+</div>
+<!-- Document Item 2 -->
+<div class="flex items-center p-md border-b-[0.5px] border-outline-variant hover:bg-surface-container-low transition-colors cursor-pointer min-h-[48px]">
+<div class="w-10 h-10 flex items-center justify-center bg-blue-50 text-blue-600 rounded-lg mr-md">
+<span class="material-symbols-outlined text-[24px]">description</span>
+</div>
+<div class="flex-1">
+<h4 class="font-body-md text-body-md text-on-surface font-medium truncate">Water_Supply_Notice.docx</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">450 KB • 5 days ago</p>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</button>
+</div>
+<!-- Document Item 3 -->
+<div class="flex items-center p-md hover:bg-surface-container-low transition-colors cursor-pointer min-h-[48px]">
+<div class="w-10 h-10 flex items-center justify-center bg-yellow-50 text-yellow-700 rounded-lg mr-md">
+<span class="material-symbols-outlined text-[24px]">image</span>
+</div>
+<div class="flex-1">
+<h4 class="font-body-md text-body-md text-on-surface font-medium truncate">Building_Plan_Site_A.jpg</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">4.1 MB • 1 week ago</p>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Storage Status Visualizer (Bento-like Card) -->
+<section class="mb-xl">
+<div class="bg-primary-container p-lg rounded-xl text-on-primary">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-headline-sm text-headline-sm">Vault Storage</h3>
+<p class="font-body-md text-body-md opacity-80 mt-1">Shared society storage space</p>
+</div>
+<div class="bg-white/10 px-3 py-1 rounded-full border border-white/20">
+<span class="font-label-md text-label-md">Tier 1</span>
+</div>
+</div>
+<div class="h-2 w-full bg-white/20 rounded-full mb-2 overflow-hidden">
+<div class="h-full bg-secondary-container w-[65%] rounded-full"></div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<span class="font-label-sm text-label-sm">6.5 GB of 10 GB used</span>
+<button class="font-label-md text-label-md flex items-center gap-1 hover:underline">
+                        Upgrade <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-surface border-t border-outline-variant">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-transform active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<!-- Bills -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-transform active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md mt-1">Bills</span>
+</a>
+<!-- Notices -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-transform active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-label-md text-label-md mt-1">Notices</span>
+</a>
+<!-- Profile (Vault sits under profile context or active state) -->
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container rounded-xl px-4 py-1 transition-transform active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md mt-1 font-bold">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for folder clicks
+        document.querySelectorAll('.folder-transition').forEach(folder => {
+            folder.addEventListener('click', function() {
+                const title = this.querySelector('h3').innerText;
+                console.log(`Opening folder: ${title}`);
+                // In a real app, this would navigate to a sub-page
+            });
+        });
+    </script>
+</body></html>

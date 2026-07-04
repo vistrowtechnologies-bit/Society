@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SocietyOS | Member Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#eeeeec",
+                    "on-secondary-fixed": "#2a1800",
+                    "secondary": "#835400",
+                    "on-surface": "#1a1c1b",
+                    "on-secondary-container": "#6e4600",
+                    "surface-container-highest": "#e2e3e1",
+                    "outline": "#787681",
+                    "outline-variant": "#c8c5d1",
+                    "surface-dim": "#dadad8",
+                    "secondary-fixed-dim": "#ffb956",
+                    "tertiary-container": "#003110",
+                    "primary-fixed": "#e3dfff",
+                    "surface": "#f9f9f7",
+                    "on-primary-container": "#8e8acb",
+                    "on-surface-variant": "#47464f",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f4f4f2",
+                    "on-background": "#1a1c1b",
+                    "tertiary-fixed-dim": "#62df7d",
+                    "tertiary-fixed": "#7ffc97",
+                    "tertiary": "#001a06",
+                    "surface-container-high": "#e8e8e6",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffddb5",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#005320",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#f9f9f7",
+                    "inverse-primary": "#c5c0ff",
+                    "primary-container": "#26215c",
+                    "inverse-on-surface": "#f1f1ef",
+                    "on-primary-fixed-variant": "#443f7b",
+                    "on-secondary-fixed-variant": "#633f00",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#17114d",
+                    "surface-tint": "#5b5795",
+                    "primary-fixed-dim": "#c5c0ff",
+                    "on-tertiary-fixed": "#002109",
+                    "secondary-container": "#fdb244",
+                    "on-tertiary-container": "#1ca64c",
+                    "primary": "#110847",
+                    "surface-bright": "#f9f9f7",
+                    "inverse-surface": "#2f3130",
+                    "surface-variant": "#e2e3e1",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "xl": "32px",
+                    "container-max": "1440px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "md": "16px",
+                    "rail-width": "240px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7F7F5;
+            color: #1a1c1b;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e3e1;
+            border-radius: 10px;
+        }
+        .flat-card-hover {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .flat-card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex min-h-screen bg-surface">
+<!-- Navigation Drawer (Desktop Rail) -->
+<aside class="hidden md:flex fixed left-0 top-0 h-full w-rail-width bg-primary-container text-on-primary-container flex-col py-lg z-40 transition-all duration-200">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-on-primary">SocietyOS</h1>
+<div class="mt-lg flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-on-primary-fixed-variant flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-primary">Society Secretary</p>
+<p class="text-[10px] opacity-70 uppercase tracking-widest font-bold">Admin Console</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-xs">
+<a class="flex items-center px-lg py-md text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined mr-md">grid_view</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Active State: Resident Directory -->
+<a class="flex items-center px-lg py-md text-on-primary border-l-4 border-secondary-container bg-on-primary-fixed-variant transition-all" href="#">
+<span class="material-symbols-outlined mr-md">group</span>
+<span class="font-label-md text-label-md">Resident Directory</span>
+</a>
+<a class="flex items-center px-lg py-md text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined mr-md">receipt_long</span>
+<span class="font-label-md text-label-md">Financial Billing</span>
+</a>
+<a class="flex items-center px-lg py-md text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined mr-md">handyman</span>
+<span class="font-label-md text-label-md">Maintenance Requests</span>
+</a>
+<a class="flex items-center px-lg py-md text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined mr-md">campaign</span>
+<span class="font-label-md text-label-md">Notice Board</span>
+</a>
+<a class="flex items-center px-lg py-md text-on-primary-container opacity-80 hover:bg-on-primary-fixed-variant hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined mr-md">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="px-lg mt-auto">
+<div class="p-md rounded-xl bg-on-primary-fixed-variant/30">
+<p class="text-[11px] text-primary-fixed font-bold">Maple Heights HOA</p>
+<p class="text-[10px] text-primary-fixed/60">System v2.4.0-Stable</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-rail-width min-w-0 transition-all duration-200">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-30 bg-surface border-b border-outline-variant flex justify-between items-center px-lg h-16 max-w-container-max mx-auto">
+<div class="flex items-center gap-md">
+<button class="md:hidden p-md -ml-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-sm text-headline-sm text-primary font-bold">Resident Directory</h2>
+</div>
+<div class="flex items-center gap-lg">
+<div class="hidden sm:flex items-center px-md py-sm bg-surface-container rounded-full border border-outline-variant/30">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] mr-sm">search</span>
+<input class="bg-transparent border-none outline-none text-label-md focus:ring-0 w-32 md:w-48" placeholder="Global search..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-sm text-on-surface-variant hover:bg-surface-container rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a mature person in business casual attire, acting as the society secretary administrator. The lighting is soft and corporate, set against a blurred modern office interior. The image has a warm, high-quality professional aesthetic consistent with a premium management software." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqY911skPyKnf6wnGRcCCX8TvhFuMqDnM_2jL6sVzbDwNsQnyMghA8GwLIDgbT61DZUP6JzKJhkNlh5PpRF8XgNQv1Zze0HOicNoK8efqizcCZ2935khsHmIAwjLBKtdgg_uajW5Nw43uEd7YdQNUVzC9VNO7yQAlL9r5cWiD0Cluf6OX1K2WXt3yU0EKs13U7tHciXUaMT7LPrdcLbNXPC1i-tUg1Wt4Go8MuVfxG_oH1fIgwp-AH"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Search and Filter Bar -->
+<section class="p-lg max-w-container-max mx-auto">
+<div class="flex flex-col lg:flex-row gap-lg items-center justify-between bg-surface-container-lowest p-md rounded-xl border border-outline-variant/40 shadow-sm">
+<div class="relative w-full lg:max-w-md">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-xl pr-md py-md rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary/10 text-body-md transition-all" placeholder="Search by name or flat number..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-md w-full lg:w-auto">
+<div class="flex items-center gap-sm px-md py-sm bg-surface rounded-lg border border-outline-variant cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">apartment</span>
+<select class="bg-transparent border-none focus:ring-0 text-label-md font-semibold text-on-surface appearance-none pr-lg">
+<option>All Towers</option>
+<option>Tower A</option>
+<option>Tower B</option>
+<option>Tower C</option>
+</select>
+</div>
+<div class="flex items-center gap-sm px-md py-sm bg-surface rounded-lg border border-outline-variant cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">person_check</span>
+<select class="bg-transparent border-none focus:ring-0 text-label-md font-semibold text-on-surface appearance-none pr-lg">
+<option>All Status</option>
+<option>Owner</option>
+<option>Tenant</option>
+</select>
+</div>
+<button class="flex items-center gap-sm px-lg py-md bg-primary text-on-primary rounded-lg font-label-md hover:opacity-90 active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined">add</span>
+                        Add Resident
+                    </button>
+</div>
+</div>
+</section>
+<!-- Members Grid -->
+<section class="px-lg pb-xl max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-lg">
+<!-- Resident Card Template -->
+<script>
+                    const residents = [
+                        { flat: 'A-101', name: 'Rahul Sharma', status: 'Owner', tower: 'Tower A', phone: '+91 98765 43210', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100' },
+                        { flat: 'A-102', name: 'Priya Verma', status: 'Tenant', tower: 'Tower A', phone: '+91 91234 56789', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100' },
+                        { flat: 'A-205', name: 'Arjun Kapoor', status: 'Owner', tower: 'Tower A', phone: '+91 99887 76655', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100' },
+                        { flat: 'B-101', name: 'Sneha Gupta', status: 'Owner', tower: 'Tower B', phone: '+91 94433 22110', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100' },
+                        { flat: 'B-304', name: 'Vikram Singh', status: 'Tenant', tower: 'Tower B', phone: '+91 96655 44332', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=100' },
+                        { flat: 'C-102', name: 'Ananya Reddy', status: 'Owner', tower: 'Tower C', phone: '+91 90000 11223', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=100' },
+                        { flat: 'C-201', name: 'Mohit Malhotra', status: 'Tenant', tower: 'Tower C', phone: '+91 97777 88888', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=100' },
+                        { flat: 'A-404', name: 'Zoya Khan', status: 'Owner', tower: 'Tower A', phone: '+91 91111 22222', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=100' },
+                    ];
+
+                    const colors = {
+                        'Owner': 'bg-tertiary-fixed text-on-tertiary-fixed-variant',
+                        'Tenant': 'bg-secondary-fixed text-on-secondary-fixed-variant'
+                    };
+
+                    residents.forEach(res => {
+                        document.write(`
+                            <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-md flat-card-hover cursor-pointer flex flex-col gap-md relative overflow-hidden group">
+                                <div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full -mr-4 -mt-4 transition-all group-hover:scale-150 group-hover:bg-primary/10"></div>
+                                
+                                <div class="flex items-start justify-between relative z-10">
+                                    <div class="flex items-center gap-md">
+                                        <div class="w-12 h-12 rounded-xl overflow-hidden border-2 border-surface shadow-sm">
+                                            <img src="placeholder" data-alt="Close-up studio portrait of a resident named ${res.name} for a modern housing society member profile. High-end lighting, neutral background, sharp focus, professional photography style." class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <h3 class="font-title-lg text-title-lg text-on-surface leading-tight">${res.name}</h3>
+                                            <p class="text-on-surface-variant font-label-md text-label-md">${res.tower}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-end gap-xs">
+                                        <span class="font-headline-sm text-headline-sm font-extrabold text-primary">${res.flat}</span>
+                                        <span class="px-sm py-[2px] rounded-full text-[10px] font-bold uppercase tracking-wider ${colors[res.status]}">${res.status}</span>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-sm pt-sm border-t border-outline-variant/20 relative z-10">
+                                    <div class="flex items-center gap-sm text-on-surface-variant">
+                                        <span class="material-symbols-outlined text-[18px]">call</span>
+                                        <span class="text-body-sm font-medium">${res.phone}</span>
+                                    </div>
+                                    <div class="flex items-center gap-sm text-on-surface-variant">
+                                        <span class="material-symbols-outlined text-[18px]">verified_user</span>
+                                        <span class="text-body-sm">Verified Resident</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between gap-sm pt-sm relative z-10">
+                                    <button class="flex-1 py-sm bg-surface-container text-on-surface-variant font-label-md rounded-lg hover:bg-surface-container-highest transition-colors active:scale-95">View Profile</button>
+                                    <button class="p-sm bg-surface-container text-on-surface-variant rounded-lg hover:bg-primary hover:text-on-primary transition-all active:scale-90">
+                                        <span class="material-symbols-outlined text-[20px]">chat</span>
+                                    </button>
+                                </div>
+                            </div>
+                        `);
+                    });
+                </script>
+</div>
+</section>
+</main>
+<!-- Mobile Bottom Nav -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter py-sm bg-surface border-t border-outline-variant shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-sm text-label-sm">Members</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-sm text-label-sm">Billing</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined">report_problem</span>
+<span class="font-label-sm text-label-sm">Complaints</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined">menu</span>
+<span class="font-label-sm text-label-sm">More</span>
+</a>
+</nav>
+<!-- Floating Action Button (Only for relevant desktop screens, tucked away) -->
+<button class="hidden md:flex fixed bottom-lg right-lg w-14 h-14 bg-primary text-on-primary rounded-2xl items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-[28px]">chat_bubble</span>
+</button>
+<script>
+        // Micro-interactions and simple search simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        const cards = document.querySelectorAll('.flat-card-hover');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if(text.includes(term)) {
+                    card.style.display = 'flex';
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        if(card.style.opacity === '0') card.style.display = 'none';
+                    }, 200);
+                }
+            });
+        });
+
+        // Toggle Active State logic for nav items
+        document.querySelectorAll('aside nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                document.querySelectorAll('aside nav a').forEach(l => {
+                    l.classList.remove('text-on-primary', 'border-l-4', 'border-secondary-container', 'bg-on-primary-fixed-variant');
+                    l.classList.add('text-on-primary-container', 'opacity-80');
+                });
+                link.classList.add('text-on-primary', 'border-l-4', 'border-secondary-container', 'bg-on-primary-fixed-variant');
+                link.classList.remove('text-on-primary-container', 'opacity-80');
+            });
+        });
+    </script>
+</body></html>

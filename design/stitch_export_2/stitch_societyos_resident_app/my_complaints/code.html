@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SocietyHub - My Complaints</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#2a1800",
+                    "tertiary-container": "#003110",
+                    "on-primary-fixed-variant": "#443f7b",
+                    "on-primary-container": "#8e8acb",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#dadad8",
+                    "on-background": "#1a1c1b",
+                    "surface": "#f9f9f7",
+                    "on-surface-variant": "#47464f",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#005320",
+                    "primary-fixed": "#e3dfff",
+                    "surface-container-highest": "#e2e3e1",
+                    "outline-variant": "#c8c5d1",
+                    "surface-tint": "#5b5795",
+                    "on-secondary-container": "#6e4600",
+                    "inverse-primary": "#c5c0ff",
+                    "secondary-container": "#fdb244",
+                    "on-primary-fixed": "#17114d",
+                    "tertiary": "#001a06",
+                    "on-tertiary-container": "#1ca64c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1a1c1b",
+                    "tertiary-fixed": "#7ffc97",
+                    "tertiary-fixed-dim": "#62df7d",
+                    "primary-container": "#26215c",
+                    "on-secondary": "#ffffff",
+                    "outline": "#787681",
+                    "inverse-on-surface": "#f1f1ef",
+                    "primary-fixed-dim": "#c5c0ff",
+                    "secondary-fixed-dim": "#ffb956",
+                    "surface-bright": "#f9f9f7",
+                    "secondary-fixed": "#ffddb5",
+                    "on-secondary-fixed-variant": "#633f00",
+                    "surface-container": "#eeeeec",
+                    "inverse-surface": "#2f3130",
+                    "surface-container-high": "#e8e8e6",
+                    "on-error-container": "#93000a",
+                    "primary": "#110847",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary": "#835400",
+                    "surface-variant": "#e2e3e1",
+                    "surface-container-low": "#f4f4f2",
+                    "background": "#f9f9f7",
+                    "on-tertiary-fixed": "#002109"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7f7f5;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .complaint-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .complaint-card:active {
+            transform: scale(0.98);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e3e1;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface border-b border-outline-variant h-16 flex justify-between items-center px-margin-mobile">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A clean, professional headshot of a young Indian woman with a friendly expression, set against a soft-focus modern apartment interior. The lighting is natural and bright, echoing a light-mode UI aesthetic with clean whites and soft grays. The overall mood is approachable and trustworthy, fitting for a community-centric application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUv7zT6WV_w7HpcMmPy6v1duqX5J3pivJnRmsRQl2y_go7ZwgP-vpNnqh0dbPf6GBBRU2XTtANwLE6So6C1_dCEsj591AFcl71u4kCAptxwOWreUBeS76vverWh3wZ9LdfAO-gMxilPQEbmjxDZvCQu6Z4myZaiIh3xkr5qfZ19eFwKBsf2vXj4-5dFaOC_OsYQi_n2WrH17QPnzpg7RIoKflLTMe1qATQsIh2o8Hm0Y_GEkDDW3xMuA"/>
+</div>
+<span class="font-headline-md text-headline-md-mobile text-primary tracking-tight">SocietyHub</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors active:scale-95 duration-150 text-primary">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-20 pb-24 min-h-screen px-margin-mobile">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<p class="font-label-md text-label-md text-outline uppercase tracking-wider mb-1">Assistance</p>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary">My Complaints</h1>
+</div>
+<button class="bg-primary text-on-primary rounded-xl px-4 py-2 flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+<span class="font-label-md text-label-md">New Request</span>
+</button>
+</div>
+<!-- Filter Chips (Atmospheric UI) -->
+<div class="flex gap-2 overflow-x-auto pb-4 no-scrollbar mb-md">
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md whitespace-nowrap">All Complaints</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md border border-outline-variant whitespace-nowrap">Active</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md border border-outline-variant whitespace-nowrap">Resolved</button>
+</div>
+<!-- Complaints List (Bento-lite Card Layout) -->
+<div class="grid gap-gutter">
+<!-- Card 1: In Progress -->
+<div class="complaint-card bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-outline uppercase">Plumbing</span>
+<span class="px-3 py-1 rounded-full bg-[#26215C] text-white font-label-md text-label-md flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                        In Progress
+                    </span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Kitchen sink leakage in B-402</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Main pipe joint seems loose. Water is seeping into the wooden cabinet below. Urgent repair needed.</p>
+</div>
+<div class="pt-3 border-t border-outline-variant flex justify-between items-center">
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm">Submitted Oct 24</span>
+</div>
+<div class="text-primary font-label-md text-label-md">
+                        Last updated: 2h ago
+                    </div>
+</div>
+</div>
+<!-- Card 2: Open -->
+<div class="complaint-card bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-outline uppercase">Electrical</span>
+<span class="px-3 py-1 rounded-full bg-[#D97706]/10 text-[#D97706] font-label-md text-label-md border border-[#D97706]/20">
+                        Open
+                    </span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Common area light flickering</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">The light outside the elevator on the 4th floor has been flickering for two days.</p>
+</div>
+<div class="pt-3 border-t border-outline-variant flex justify-between items-center">
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm">Submitted Oct 26</span>
+</div>
+<div class="text-primary font-label-md text-label-md">
+                        Last updated: Just now
+                    </div>
+</div>
+</div>
+<!-- Card 3: Resolved -->
+<div class="complaint-card bg-surface-container-low/50 border-[0.5px] border-outline-variant rounded-xl p-md flex flex-col gap-3 grayscale-[0.3]">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-outline uppercase">Security</span>
+<span class="px-3 py-1 rounded-full bg-[#16A34A]/10 text-[#16A34A] font-label-md text-label-md border border-[#16A34A]/20">
+                        Resolved
+                    </span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Stray dog entry in basement P1</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">A stray dog was found sleeping near the parking entrance. Security informed.</p>
+</div>
+<div class="pt-3 border-t border-outline-variant flex justify-between items-center">
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm">Submitted Oct 20</span>
+</div>
+<div class="text-primary font-label-md text-label-md">
+                        Last updated: Oct 21
+                    </div>
+</div>
+</div>
+<!-- Visual Break: Featured Service Banner -->
+<div class="relative overflow-hidden rounded-xl h-32 flex items-center px-md border-[0.5px] border-outline-variant">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="A macro photograph of professional tools—a chrome wrench and electrical screwdriver—lying on a clean white marble surface. The lighting is bright and high-contrast, with sharp shadows typical of a modern architectural magazine. The colors are dominated by industrial silvers and deep blues, aligning with the SocietyHub branding. The overall feeling is one of efficiency and precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-q-dRF69gOXTda87PZhg9hJEn9aX6TDTzCS8EBEkPpRyHJjMiYCuDeFn9favttqDN4BgGyvWzJWKykInfhcF6wNFKjU3wJT6TrptSntolhhuCTvOujjch3QladMbDPCgyuO-cEZ_27poYKK9xpqkgUavs4IJAfHz-igOk3iz4PvjGEbu2k23kLiO48M2RVWVyv2bcwZeraGvEBNG-H-Vecm2UtfbLZr-Hf5DloCMkcqNp1Ixeg0-aFA"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent"></div>
+</div>
+<div class="relative z-10">
+<h4 class="text-white font-headline-sm text-headline-sm">Need help faster?</h4>
+<p class="text-white/80 font-body-md text-body-md">Call Society Support: 1800-SOC-HELP</p>
+</div>
+</div>
+<!-- Card 4: Resolved -->
+<div class="complaint-card bg-surface-container-low/50 border-[0.5px] border-outline-variant rounded-xl p-md flex flex-col gap-3 grayscale-[0.3]">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-outline uppercase">Carpentry</span>
+<span class="px-3 py-1 rounded-full bg-[#16A34A]/10 text-[#16A34A] font-label-md text-label-md border border-[#16A34A]/20">
+                        Resolved
+                    </span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Loose balcony door handle</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">The main balcony door handle is loose and might fall off. Requires tightening.</p>
+</div>
+<div class="pt-3 border-t border-outline-variant flex justify-between items-center">
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm">Submitted Oct 15</span>
+</div>
+<div class="text-primary font-label-md text-label-md">
+                        Last updated: Oct 16
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-surface border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors rounded-xl group active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:text-primary transition-colors" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors rounded-xl group active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:text-primary transition-colors" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-md text-label-md">Bills</span>
+</a>
+<!-- Active Tab: Notices/Complaints contextually mapped to "Notices" or similar if logic dictates, but here we stay neutral or highlight based on user's current view which is "Complaints". Since JSON doesn't have "Complaints", we might leave home active or use a specific mapping. Let's assume Notices is the closest management tab. -->
+<a class="flex flex-col items-center justify-center text-primary bg-secondary-container rounded-xl px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="campaign" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span class="font-label-md text-label-md">Notices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-colors rounded-xl group active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:text-primary transition-colors" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.complaint-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('border-primary/20');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('border-primary/20');
+            });
+        });
+
+        // Pull to refresh simulation feel (visual only)
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (currentScroll > lastScroll && currentScroll > 64) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            header.style.transition = 'transform 0.3s ease-in-out';
+            lastScroll = currentScroll;
+        });
+    </script>
+</body></html>

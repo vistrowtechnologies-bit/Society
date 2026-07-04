@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SocietyHub - Payment History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#2a1800",
+                    "tertiary-container": "#003110",
+                    "on-primary-fixed-variant": "#443f7b",
+                    "on-primary-container": "#8e8acb",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#dadad8",
+                    "on-background": "#1a1c1b",
+                    "surface": "#f9f9f7",
+                    "on-surface-variant": "#47464f",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#005320",
+                    "primary-fixed": "#e3dfff",
+                    "surface-container-highest": "#e2e3e1",
+                    "outline-variant": "#c8c5d1",
+                    "surface-tint": "#5b5795",
+                    "on-secondary-container": "#6e4600",
+                    "inverse-primary": "#c5c0ff",
+                    "secondary-container": "#fdb244",
+                    "on-primary-fixed": "#17114d",
+                    "tertiary": "#001a06",
+                    "on-tertiary-container": "#1ca64c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1a1c1b",
+                    "tertiary-fixed": "#7ffc97",
+                    "tertiary-fixed-dim": "#62df7d",
+                    "primary-container": "#26215c",
+                    "on-secondary": "#ffffff",
+                    "outline": "#787681",
+                    "inverse-on-surface": "#f1f1ef",
+                    "primary-fixed-dim": "#c5c0ff",
+                    "secondary-fixed-dim": "#ffb956",
+                    "surface-bright": "#f9f9f7",
+                    "secondary-fixed": "#ffddb5",
+                    "on-secondary-fixed-variant": "#633f00",
+                    "surface-container": "#eeeeec",
+                    "inverse-surface": "#2f3130",
+                    "surface-container-high": "#e8e8e6",
+                    "on-error-container": "#93000a",
+                    "primary": "#110847",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary": "#835400",
+                    "surface-variant": "#e2e3e1",
+                    "surface-container-low": "#f4f4f2",
+                    "background": "#f9f9f7",
+                    "on-tertiary-fixed": "#002109"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "xl": "32px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface dark:bg-surface-container border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a friendly community resident, shot in natural daylight with a soft-focus residential background. The aesthetic is clean, modern, and trustworthy, aligning with a high-end society management application. Lighting is warm and welcoming, emphasizing a premium light-mode user interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyLwKpkw5Oddei2KbMagRFoY1vFzXpSifptmoOugXVULPmR9G0VIB6EBJVzaw_7nDKTm4KMZvi69oue1afrCAAZ44FCqBA2mwW_npuZM_qBKhJWOatMwxVh1FykWRnj-kVibBaGOnntkY2bAPQ554azkJtzPDiyyjxKtoJUdSCZaxPi9cILoUOMlQOpHgZpyeChjcl2zOxn8WdyD2BoZ70P7_dHKKAzwp7ZXYlMd40N-2SGsrV2Vr5Eg"/>
+</div>
+<h1 class="font-headline-md text-headline-md-mobile text-primary dark:text-primary-fixed">SocietyHub</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-margin-mobile max-w-2xl mx-auto">
+<!-- Header & Year Selector -->
+<section class="mb-lg">
+<div class="flex flex-col gap-sm">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface">Payment History</h2>
+<p class="font-body-md text-on-surface-variant">View and download your past society dues.</p>
+</div>
+<div class="mt-md flex gap-sm overflow-x-auto no-scrollbar py-2">
+<button class="px-5 py-2 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md transition-all active:scale-95">2024</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-all active:scale-95">2023</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-all active:scale-95">2022</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-all active:scale-95">2021</button>
+</div>
+</section>
+<!-- Stats Overview Card -->
+<div class="mb-lg p-md bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl flex justify-between items-center">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Paid (2024)</p>
+<p class="font-display-lg-mobile text-display-lg-mobile text-primary mt-1">₹48,500.00</p>
+</div>
+<div class="w-12 h-12 bg-tertiary-container/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="account_balance_wallet" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+</div>
+<!-- Billing List -->
+<div class="space-y-md">
+<!-- Item 1 -->
+<div class="group bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex flex-col items-center justify-center border-[0.5px] border-outline-variant">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Mar</span>
+<span class="font-headline-sm text-headline-sm text-primary">24</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold">Maintenance Bill</h4>
+<p class="font-label-md text-label-md text-on-surface-variant">Paid on 02 Mar, 2024</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg text-body-lg text-on-surface font-bold">₹12,000</p>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-container/10 text-on-tertiary-container font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                        Paid
+                    </span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex flex-col items-center justify-center border-[0.5px] border-outline-variant">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Feb</span>
+<span class="font-headline-sm text-headline-sm text-primary">24</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold">Maintenance Bill</h4>
+<p class="font-label-md text-label-md text-on-surface-variant">Paid on 05 Feb, 2024</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg text-body-lg text-on-surface font-bold">₹12,000</p>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-container/10 text-on-tertiary-container font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                        Paid
+                    </span>
+</div>
+</div>
+<!-- Item 3 - Overdue -->
+<div class="group bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200 ring-1 ring-error/20">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-error-container/20 rounded-lg flex flex-col items-center justify-center border-[0.5px] border-error/20">
+<span class="font-label-md text-label-md text-error uppercase">Jan</span>
+<span class="font-headline-sm text-headline-sm text-error">24</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold">Clubhouse Surcharge</h4>
+<p class="font-label-md text-label-md text-error">Overdue since 15 Jan</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg text-body-lg text-on-surface font-bold">₹2,500</p>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-on-error-container"></span>
+                        Overdue
+                    </span>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="group bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex flex-col items-center justify-center border-[0.5px] border-outline-variant">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Jan</span>
+<span class="font-headline-sm text-headline-sm text-primary">24</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold">Maintenance Bill</h4>
+<p class="font-label-md text-label-md text-on-surface-variant">Paid on 08 Jan, 2024</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg text-body-lg text-on-surface font-bold">₹12,000</p>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-container/10 text-on-tertiary-container font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                        Paid
+                    </span>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="group bg-surface-container-lowest border-[0.5px] border-outline-variant rounded-xl p-md flex items-center justify-between hover:bg-surface-container-low transition-colors duration-200">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex flex-col items-center justify-center border-[0.5px] border-outline-variant">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Dec</span>
+<span class="font-headline-sm text-headline-sm text-primary">23</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold">Corpus Fund Installment</h4>
+<p class="font-label-md text-label-md text-on-surface-variant">Paid on 20 Dec, 2023</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-body-lg text-body-lg text-on-surface font-bold">₹10,000</p>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-tertiary-container/10 text-on-tertiary-container font-label-md text-label-md">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                        Paid
+                    </span>
+</div>
+</div>
+</div>
+<!-- CTA for downloading summary -->
+<button class="w-full mt-xl py-4 bg-primary text-on-primary rounded-xl font-headline-sm text-center active:scale-[0.98] transition-transform flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+            Download 2024 Statement
+        </button>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-surface dark:bg-surface-dim border-t border-outline-variant">
+<!-- Home -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</button>
+<!-- Bills (ACTIVE) -->
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-secondary-container dark:bg-primary-container rounded-xl px-4 py-1 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="receipt_long" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-md text-label-md">Bills</span>
+</button>
+<!-- Notices -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="campaign">campaign</span>
+<span class="font-label-md text-label-md">Notices</span>
+</button>
+<!-- Profile -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline px-4 py-1 hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple Interaction logic for Year Selector
+        document.querySelectorAll('.no-scrollbar button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.no-scrollbar button').forEach(b => {
+                    b.classList.remove('bg-primary-container', 'text-on-primary-container');
+                    b.classList.add('border', 'border-outline-variant', 'text-on-surface-variant');
+                });
+                this.classList.add('bg-primary-container', 'text-on-primary-container');
+                this.classList.remove('border', 'border-outline-variant', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>
