@@ -71,7 +71,14 @@ class AppTheme {
         style: FilledButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
-          minimumSize: const Size.fromHeight(52),
+          // NOTE: Size.fromHeight(52) sets minimum WIDTH to double.infinity,
+          // not just height. That's invisible on buttons inside a stretched
+          // Column (login/pay screens), but inside a bounded, non-stretching
+          // context like ListTile.trailing it corrupts layout — Flutter web
+          // renders affected Text widgets one character per line. Use a
+          // finite minimum width instead; full-width buttons still get their
+          // width from the enclosing stretched Column, not from this.
+          minimumSize: const Size(64, 52),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
@@ -80,7 +87,9 @@ class AppTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.textPrimary,
           side: const BorderSide(color: AppColors.border, width: 0.5),
-          minimumSize: const Size.fromHeight(52),
+          // See the note on filledButtonTheme above — Size.fromHeight sets
+          // minimum width to infinity, which breaks ListTile.trailing layout.
+          minimumSize: const Size(64, 52),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
       ),
