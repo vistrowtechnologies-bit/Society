@@ -2,6 +2,7 @@ import warnings
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 
 from app.config import settings
 from app.database import Base, engine
@@ -38,6 +39,11 @@ app.include_router(notices.router)
 app.include_router(admin.router)
 app.include_router(ai_secretary.router)
 app.include_router(receipts.router)
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/health")
