@@ -245,4 +245,163 @@ class ApiClient {
   }) async {
     return await _post('/ai/generate-notice', {'prompt': prompt, 'society_name': societyName});
   }
+
+  // Visitors
+  static Future<Map<String, dynamic>> preApproveVisitor({
+    required int flatId,
+    required String name,
+    String? phone,
+    String purpose = 'guest',
+  }) async {
+    return await _post('/visitors', {
+      'flat_id': flatId,
+      'name': name,
+      'phone': phone,
+      'purpose': purpose,
+    });
+  }
+
+  static Future<List<dynamic>> flatVisitors(int flatId) async => await _get('/visitors/flat/$flatId');
+
+  static Future<List<dynamic>> societyVisitors(int societyId, {String? status}) async {
+    final query = status != null ? '?status_filter=$status' : '';
+    return await _get('/visitors/society/$societyId$query');
+  }
+
+  static Future<void> updateVisitorStatus(int visitorId, String status) async {
+    await _patch('/visitors/$visitorId/status', {'status': status});
+  }
+
+  // Vehicles
+  static Future<Map<String, dynamic>> addVehicle({
+    required int flatId,
+    required String plateNumber,
+    String vehicleType = 'car',
+    String? parkingSlot,
+  }) async {
+    return await _post('/vehicles', {
+      'flat_id': flatId,
+      'plate_number': plateNumber,
+      'vehicle_type': vehicleType,
+      'parking_slot': parkingSlot,
+    });
+  }
+
+  static Future<List<dynamic>> flatVehicles(int flatId) async => await _get('/vehicles/flat/$flatId');
+
+  static Future<List<dynamic>> societyVehicles(int societyId) async =>
+      await _get('/vehicles/society/$societyId');
+
+  static Future<void> deleteVehicle(int vehicleId) async => await _delete('/vehicles/$vehicleId');
+
+  // Staff
+  static Future<Map<String, dynamic>> addStaff({
+    int? flatId,
+    required String fullName,
+    String? phone,
+    String role = 'other',
+  }) async {
+    return await _post('/staff', {
+      'flat_id': flatId,
+      'full_name': fullName,
+      'phone': phone,
+      'role': role,
+    });
+  }
+
+  static Future<List<dynamic>> societyStaff(int societyId) async => await _get('/staff/society/$societyId');
+
+  static Future<void> verifyStaff(int staffId, bool isVerified) async {
+    await _patch('/staff/$staffId/verify', {'is_verified': isVerified});
+  }
+
+  static Future<void> staffCheckIn(int staffId) async {
+    await _post('/staff/$staffId/check-in', {});
+  }
+
+  static Future<void> staffCheckOut(int staffId) async {
+    await _post('/staff/$staffId/check-out', {});
+  }
+
+  static Future<List<dynamic>> staffAttendance(int staffId) async =>
+      await _get('/staff/$staffId/attendance');
+
+  // Amenities
+  static Future<Map<String, dynamic>> createAmenity({
+    required String name,
+    String? description,
+    int? capacity,
+    String openTime = '06:00',
+    String closeTime = '22:00',
+  }) async {
+    return await _post('/amenities', {
+      'name': name,
+      'description': description,
+      'capacity': capacity,
+      'open_time': openTime,
+      'close_time': closeTime,
+    });
+  }
+
+  static Future<List<dynamic>> amenities(int societyId) async => await _get('/amenities/society/$societyId');
+
+  static Future<void> deleteAmenity(int amenityId) async => await _delete('/amenities/$amenityId');
+
+  static Future<Map<String, dynamic>> bookAmenity({
+    required int amenityId,
+    required int flatId,
+    required String bookingDate,
+    required String startTime,
+    required String endTime,
+  }) async {
+    return await _post('/amenities/bookings', {
+      'amenity_id': amenityId,
+      'flat_id': flatId,
+      'booking_date': bookingDate,
+      'start_time': startTime,
+      'end_time': endTime,
+    });
+  }
+
+  static Future<List<dynamic>> amenityBookings(int amenityId) async =>
+      await _get('/amenities/bookings/amenity/$amenityId');
+
+  static Future<List<dynamic>> flatBookings(int flatId) async =>
+      await _get('/amenities/bookings/flat/$flatId');
+
+  static Future<void> cancelBooking(int bookingId) async =>
+      await _delete('/amenities/bookings/$bookingId');
+
+  // SOS
+  static Future<Map<String, dynamic>> raiseSOS({required int flatId, String? message}) async {
+    return await _post('/sos', {'flat_id': flatId, 'message': message});
+  }
+
+  static Future<List<dynamic>> mySOSAlerts() async => await _get('/sos/mine');
+
+  static Future<List<dynamic>> societySOSAlerts(int societyId, {bool activeOnly = true}) async =>
+      await _get('/sos/society/$societyId?active_only=$activeOnly');
+
+  static Future<void> resolveSOS(int alertId) async {
+    await _patch('/sos/$alertId/resolve', {});
+  }
+
+  // Polls
+  static Future<Map<String, dynamic>> createPoll({
+    required int societyId,
+    required String question,
+    required List<String> options,
+  }) async {
+    return await _post('/polls', {
+      'society_id': societyId,
+      'question': question,
+      'options': options,
+    });
+  }
+
+  static Future<List<dynamic>> polls(int societyId) async => await _get('/polls/society/$societyId');
+
+  static Future<Map<String, dynamic>> votePoll(int pollId, int optionId) async {
+    return await _post('/polls/$pollId/vote', {'option_id': optionId});
+  }
 }

@@ -25,6 +25,7 @@ class UserRole(str, enum.Enum):
     treasurer = "treasurer"
     committee = "committee"
     resident = "resident"
+    guard = "guard"
 
 
 class MemberRelation(str, enum.Enum):
@@ -215,3 +216,178 @@ class Notice(Base):
     title = Column(String, nullable=False)
     body = Column(Text, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
+
+
+# ---- Visitor management ----
+
+class VisitorStatus(str, enum.Enum):
+    pending = "pending"
+    approved = "approved"
+    denied = "denied"
+    checked_in = "checked_in"
+    checked_out = "checked_out"
+
+
+class Visitor(Base):
+    __tablename__ = "visitors"
+
+    id = Column(Integer, primary_key=True)
+    society_id = Column(Integer, ForeignKey("societies.id"), nullable=False)
+    flat_id = Column(Integer, ForeignKey("flats.id"), nullable=False)
+    name = Column(String, nullable=False)
+    phone = Column(String)
+    purpose = Column(String, default="guest")
+    status = Column(Enum(VisitorStatus), nullable=False, default=VisitorStatus.pending)
+    pre_approved_by = Column(Integer, ForeignKey("users.id"), nullable=True)
+    checked_in_by = Column(Integer, ForeignKey("users.id"), nullable=True)
+    checked_in_at = Column(DateTime, nullable=True)
+    checked_out_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
+# ---- Vehicle & parking ----
+
+class VehicleType(str, enum.Enum):
+    car = "car"
+    bike = "bike"
+    other = "other"
+
+
+class Vehicle(Base):
+    __tablename__ = "vehicles"
+
+    id = Column(Integer, primary_key=True)
+    flat_id = Column(Integer, ForeignKey("flats.id"), nullable=False)
+    plate_number = Column(String, nullable=False)
+    vehicle_type = Column(Enum(VehicleType), nullable=False, default=VehicleType.car)
+    parking_slot = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    __table_args__ = (UniqueConstraint("flat_id", "plate_number", name="uq_vehicle_per_flat"),)
+
+
+# ---- Staff / helper management ----
+
+class StaffRole(str, enum.Enum):
+    maid = "maid"
+    driver = "driver"
+    cook = "cook"
+    nanny = "nanny"
+    other = "other"
+
+
+class Staff(Base):
+    __tablename__ = "staff"
+
+    id = Column(Integer, primary_key=True)
+    society_id = Column(Integer, ForeignKey("societies.id"), nullable=False)
+    flat_id = Column(Integer, ForeignKey("flats.id"), nullable=True)
+    full_name = Column(String, nullable=False)
+    phone = Column(String)
+    role = Column(Enum(StaffRole), nullable=False, default=StaffRole.other)
+    is_verified = Column(Boolean, default=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class StaffAttendance(Base):
+    __tablename__ = "staff_attendance"
+
+    id = Column(Integer, primary_key=True)
+    staff_id = Column(Integer, ForeignKey("staff.id"), nullable=False)
+    checked_in_at = Column(DateTime, default=datetime.utcnow)
+    checked_out_at = Column(DateTime, nullable=True)
+
+
+# ---- Amenity booking ----
+
+class Amenity(Base):
+    __tablename__ = "amenities"
+
+    id = Column(Integer, primary_key=True)
+    society_id = Column(Integer, ForeignKey("societies.id"), nullable=False)
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=True)
+    capacity = Column(Integer, nullable=True)
+    open_time = Column(String, default="06:00")
+    close_time = Column(String, default="22:00")
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class BookingStatus(str, enum.Enum):
+    booked = "booked"
+    cancelled = "cancelled"
+
+
+class AmenityBooking(Base):
+    __tablename__ = "amenity_bookings"
+
+    id = Column(Integer, primary_key=True)
+    amenity_id = Column(Integer, ForeignKey("amenities.id"), nullable=False)
+    flat_id = Column(Integer, ForeignKey("flats.id"), nullable=False)
+    booked_by = Column(Integer, ForeignKey("users.id"), nullable=False)
+    booking_date = Column(Date, nullable=False)
+    start_time = Column(String, nullable=False)
+    end_time = Column(String, nullable=False)
+    status = Column(Enum(BookingStatus), nullable=False, default=BookingStatus.booked)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
+# ---- Panic / SOS ----
+
+class SOSStatus(str, enum.Enum):
+    active = "active"
+    resolved = "resolved"
+
+
+class SOSAlert(Base):
+    __tablename__ = "sos_alerts"
+
+    id = Column(Integer, primary_key=True)
+    society_id = Column(Integer, ForeignKey("societies.id"), nullable=False)
+    flat_id = Column(Integer, ForeignKey("flats.id"), nullable=False)
+    raised_by = Column(Integer, ForeignKey("users.id"), nullable=False)
+    message = Column(String, nullable=True)
+    status = Column(Enum(SOSStatus), nullable=False, default=SOSStatus.active)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    resolved_at = Column(DateTime, nullable=True)
+    resolved_by = Column(Integer, ForeignKey("users.id"), nullable=True)
+
+
+# ---- Polls / surveys ----
+
+class Poll(Base):
+    __tablename__ = "polls"
+
+    id = Column(Integer, primary_key=True)
+    society_id = Column(Integer, ForeignKey("societies.id"), nullable=False)
+    created_by = Column(Integer, ForeignKey("users.id"), nullable=True)
+    question = Column(String, nullable=False)
+    closes_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    options = relationship("PollOption", back_populates="poll", cascade="all, delete-orphan")
+
+
+class PollOption(Base):
+    __tablename__ = "poll_options"
+
+    id = Column(Integer, primary_key=True)
+    poll_id = Column(Integer, ForeignKey("polls.id"), nullable=False)
+    text = Column(String, nullable=False)
+
+    poll = relationship("Poll", back_populates="options")
+    votes = relationship("PollVote", back_populates="option", cascade="all, delete-orphan")
+
+
+class PollVote(Base):
+    __tablename__ = "poll_votes"
+
+    id = Column(Integer, primary_key=True)
+    poll_id = Column(Integer, ForeignKey("polls.id"), nullable=False)
+    option_id = Column(Integer, ForeignKey("poll_options.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    option = relationship("PollOption", back_populates="votes")
+
+    __table_args__ = (UniqueConstraint("poll_id", "user_id", name="uq_one_vote_per_poll"),)

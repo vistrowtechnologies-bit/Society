@@ -75,7 +75,9 @@ def seeded(db):
                         full_name="Res A", role=models.UserRole.resident, society_id=soc_a.id)
     sec_b = models.User(email="sec_b@x.com", hashed_password=hash_password("pw"),
                         full_name="Sec B", role=models.UserRole.secretary, society_id=soc_b.id)
-    db.add_all([sec_a, res_a, sec_b])
+    guard_a = models.User(email="guard_a@x.com", hashed_password=hash_password("pw"),
+                          full_name="Guard A", role=models.UserRole.guard, society_id=soc_a.id)
+    db.add_all([sec_a, res_a, sec_b, guard_a])
     db.flush()
     db.add(models.Membership(user_id=res_a.id, flat_id=flat.id,
                              relation=models.MemberRelation.owner, is_primary=True))
@@ -83,7 +85,7 @@ def seeded(db):
 
     return {
         "soc_a": soc_a.id, "soc_b": soc_b.id, "tower": tower.id, "flat": flat.id,
-        "sec_a": sec_a.id, "res_a": res_a.id, "sec_b": sec_b.id,
+        "sec_a": sec_a.id, "res_a": res_a.id, "sec_b": sec_b.id, "guard_a": guard_a.id,
     }
 
 # NOTE: keep login/auth helpers defined INSIDE each test module, not here.

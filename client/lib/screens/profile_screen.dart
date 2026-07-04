@@ -3,6 +3,11 @@ import '../api_client.dart';
 import '../theme.dart';
 import 'login_screen.dart';
 import 'my_complaints_screen.dart';
+import 'vehicles_screen.dart';
+import 'staff_screen.dart';
+import 'amenities_screen.dart';
+import 'polls_screen.dart';
+import 'sos_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -79,6 +84,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
+                if (_flat != null)
+                  Card(
+                    color: AppColors.danger.withValues(alpha: 0.08),
+                    child: ListTile(
+                      leading: const Icon(Icons.warning_rounded, color: AppColors.danger),
+                      title: const Text('Emergency SOS', style: TextStyle(color: AppColors.danger, fontWeight: FontWeight.w600)),
+                      subtitle: const Text('Alert security immediately'),
+                      trailing: const Icon(Icons.chevron_right, color: AppColors.danger),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => SosScreen(flatId: _flat!['flat_id'])),
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: 10),
                 Card(
                   child: Column(
                     children: [
@@ -90,6 +109,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           MaterialPageRoute(builder: (_) => const MyComplaintsScreen()),
                         ),
                       ),
+                      if (_flat != null) ...[
+                        const Divider(height: 1),
+                        ListTile(
+                          leading: const Icon(Icons.directions_car_outlined),
+                          title: const Text('My vehicles'),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(builder: (_) => VehiclesScreen(flatId: _flat!['flat_id'])),
+                          ),
+                        ),
+                        const Divider(height: 1),
+                        ListTile(
+                          leading: const Icon(Icons.badge_outlined),
+                          title: const Text('Domestic staff'),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(builder: (_) => StaffScreen(flatId: _flat!['flat_id'])),
+                          ),
+                        ),
+                        const Divider(height: 1),
+                        ListTile(
+                          leading: const Icon(Icons.villa_outlined),
+                          title: const Text('Amenities'),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(builder: (_) => AmenitiesScreen(societyId: _flat!['society_id'], flatId: _flat!['flat_id'])),
+                          ),
+                        ),
+                        const Divider(height: 1),
+                        ListTile(
+                          leading: const Icon(Icons.poll_outlined),
+                          title: const Text('Society polls'),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(builder: (_) => PollsScreen(societyId: _flat!['society_id'])),
+                          ),
+                        ),
+                      ],
                       const Divider(height: 1),
                       const ListTile(
                         leading: Icon(Icons.notifications_outlined),

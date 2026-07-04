@@ -6,6 +6,11 @@ import 'defaulter_list_screen.dart';
 import 'document_upload_screen.dart';
 import 'notices_composer_screen.dart';
 import 'ai_secretary_screen.dart';
+import 'admin_vehicles_screen.dart';
+import 'admin_staff_screen.dart';
+import 'admin_amenities_screen.dart';
+import 'admin_sos_screen.dart';
+import 'admin_polls_screen.dart';
 
 class AdminMoreScreen extends StatelessWidget {
   final int societyId;
@@ -21,6 +26,11 @@ class AdminMoreScreen extends StatelessWidget {
       (Icons.warning_amber_outlined, 'Defaulter list', () => DefaulterListScreen(societyId: societyId)),
       (Icons.campaign_outlined, 'Notices composer', () => NoticesComposerScreen(societyId: societyId)),
       (Icons.upload_file_outlined, 'Document upload', () => DocumentUploadScreen(societyId: societyId)),
+      (Icons.directions_car_outlined, 'Vehicles & parking', () => AdminVehiclesScreen(societyId: societyId)),
+      (Icons.badge_outlined, 'Staff directory', () => AdminStaffScreen(societyId: societyId)),
+      (Icons.villa_outlined, 'Amenities', () => AdminAmenitiesScreen(societyId: societyId)),
+      (Icons.warning_amber_outlined, 'SOS alerts', () => AdminSosScreen(societyId: societyId)),
+      (Icons.poll_outlined, 'Polls', () => AdminPollsScreen(societyId: societyId)),
     ];
 
     return Scaffold(

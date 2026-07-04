@@ -6,7 +6,24 @@ from fastapi.responses import RedirectResponse
 
 from app.config import settings
 from app.database import Base, engine
-from app.routers import auth, societies, members, billing, documents, complaints, notices, admin, ai_secretary, receipts
+from app.routers import (
+    auth,
+    societies,
+    members,
+    billing,
+    documents,
+    complaints,
+    notices,
+    admin,
+    ai_secretary,
+    receipts,
+    visitors,
+    vehicles,
+    staff,
+    amenities,
+    sos,
+    polls,
+)
 
 Base.metadata.create_all(bind=engine)
 
@@ -39,6 +56,12 @@ app.include_router(notices.router)
 app.include_router(admin.router)
 app.include_router(ai_secretary.router)
 app.include_router(receipts.router)
+app.include_router(visitors.router)
+app.include_router(vehicles.router)
+app.include_router(staff.router)
+app.include_router(amenities.router)
+app.include_router(sos.router)
+app.include_router(polls.router)
 
 
 @app.get("/", include_in_schema=False)

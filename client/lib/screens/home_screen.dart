@@ -5,6 +5,7 @@ import 'bill_detail_screen.dart';
 import 'raise_complaint_screen.dart';
 import 'document_vault_screen.dart';
 import 'notice_detail_screen.dart';
+import 'visitors_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -190,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Navigator.of(context).push(MaterialPageRoute(builder: (_) => DocumentVaultScreen(societyId: _flat!['society_id'])));
       }),
       (Icons.groups_outlined, 'Visitors', () {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Visitor management coming soon')));
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => VisitorsScreen(flatId: _flat!['flat_id'])));
       }),
     ];
     return Row(

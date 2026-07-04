@@ -106,13 +106,21 @@ class StatusBadge extends StatelessWidget {
     switch (status) {
       case 'paid':
       case 'resolved':
+      case 'approved':
+      case 'checked_in':
+      case 'booked':
         return StatusBadge(label: _sentenceCase(status), color: AppColors.success);
       case 'partial':
       case 'in_progress':
       case 'due_soon':
+      case 'pending':
+      case 'checked_out':
         return StatusBadge(label: _sentenceCase(status), color: AppColors.warning);
       case 'overdue':
       case 'open':
+      case 'denied':
+      case 'active':
+      case 'cancelled':
         return StatusBadge(label: _sentenceCase(status), color: AppColors.danger);
       default:
         return StatusBadge(label: _sentenceCase(status), color: AppColors.textSecondary);

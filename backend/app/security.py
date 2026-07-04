@@ -18,6 +18,10 @@ ALGORITHM = "HS256"
 
 # Roles that may perform committee/management actions.
 ADMIN_ROLES = {UserRole.admin, UserRole.secretary, UserRole.treasurer, UserRole.committee}
+# Roles that may operate gate/security functions (visitor check-in, staff
+# attendance) for ANY flat in their own society, not just ones they're a
+# member of — guards don't have flat memberships at all.
+GATE_ROLES = ADMIN_ROLES | {UserRole.guard}
 
 
 def hash_password(password: str) -> str:
@@ -90,3 +94,19 @@ def ensure_flat_access(db: Session, user: User, flat_id: int) -> None:
     )
     if not membership:
         raise HTTPException(status_code=403, detail="No access to this flat")
+
+
+def require_gate_staff(current_user: User = Depends(get_current_user)) -> User:
+    """Require a guard or committee-level role (gate/security operations)."""
+    if current_user.role not in GATE_ROLES:
+        raise HTTPException(status_code=403, detail="Gate staff or committee access required")
+    return current_user
+
+
+def ensure_gate_flat_access(db: Session, user: User, flat_id: int) -> None:
+    """Gate staff (guards + committee) may act on any flat in their own
+    society. Residents fall back to the ordinary flat-membership check."""
+    if user.role in GATE_ROLES:
+        ensure_society_access(user, society_id_for_flat(db, flat_id))
+        return
+    ensure_flat_access(db, user, flat_id)
