@@ -6,6 +6,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8090", "--directory", "client/build/web"],
       "port": 8090
+    },
+    {
+      "name": "societyos-marketing",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8091", "--directory", "marketing"],
+      "port": 8091
     }
   ]
 }
